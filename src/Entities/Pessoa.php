@@ -1,0 +1,136 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entities;
+
+class Pessoa extends AbstractEntity
+{
+    private ?int $endereco_id;
+    private ?string $nome;
+    private ?string $cpf;
+    private ?string $altura;
+    private ?string $peso;
+    private ?string $data_matricula;
+    private ?string $data_nascimento;
+    private ?string $senha;
+    private ?string $email;
+
+    public function getEnderecoId(): ?int
+    {
+        return $this->endereco_id;
+    }
+
+    public function setEnderecoId(?int $endereco_id): Pessoa
+    {
+        $this->endereco_id = $endereco_id;
+        return $this;
+    }
+
+    public function getNome(): ?string
+    {
+        return $this->nome;
+    }
+
+    public function setNome(?string $nome): Pessoa
+    {
+        $this->nome = $nome;
+        return $this;
+    }
+
+    public function getCpf(): ?string
+    {
+        return $this->cpf;
+    }
+
+    public function setCpf(?string $cpf): Pessoa
+    {
+        $this->cpf = $cpf;
+        return $this;
+    }
+
+    public function getAltura(): ?string
+    {
+        return $this->altura;
+    }
+
+    public function setAltura(?string $altura): Pessoa
+    {
+        $this->altura = $altura;
+        return $this;
+    }
+
+    public function getPeso(): ?string
+    {
+        return $this->peso;
+    }
+
+    public function setPeso(?string $peso): Pessoa
+    {
+        $this->peso = $peso;
+        return $this;
+    }
+
+    public function getDataMatricula(): ?string
+    {
+        return $this->data_matricula;
+    }
+
+    public function setDataMatricula(?string $data_matricula): Pessoa
+    {
+        $this->data_matricula = $data_matricula;
+        return $this;
+    }
+
+    public function getDataNascimento(): ?string
+    {
+        return $this->data_nascimento;
+    }
+
+    public function setDataNascimento(?string $data_nascimento): Pessoa
+    {
+        $this->data_nascimento = $data_nascimento;
+        return $this;
+    }
+
+    public function getSenha(): ?string
+    {
+        return $this->senha;
+    }
+
+    public function setSenha(?string $senha): Pessoa
+    {
+        $this->senha = $senha;
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): Pessoa
+    {
+        $this->email = $email;
+        return $this;
+    }
+    public static function factory($item): self
+    {
+        $item = is_array($item) ? (object)$item : $item;
+
+        $entity = (new self())
+            ->hydrate($item)
+            ->setEnderecoId($item->endereco_id ?? null)
+            ->setNome($item->nome ?? null)
+            ->setCpf($item->cpf ?? null)
+            ->setAltura($item->altura ?? null)
+            ->setPeso($item->peso ?? null)
+            ->setDatamatricula($item->data_matricula ?? null)
+            ->setDatanascimento($item->data_nascimento ?? null)
+            ->setSenha($item->senha ?? null)
+            ->setEmail($item->email ?? null)
+        ;
+
+        return $entity;
+    }
+}
