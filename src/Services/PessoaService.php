@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entities\Pessoa;
 use App\Repositories\PessoaRepository;
 
 class PessoaService
@@ -15,6 +16,14 @@ class PessoaService
     {
         return $this->pessoaRepository->findAll();
     }
+    public function find($id)
+    {
+        return $this->pessoaRepository->find($id);
+    }
 
+    public function create(Pessoa $pessoa)
+    {
+        return $this->pessoaRepository->create($pessoa);
+    }
 
 }

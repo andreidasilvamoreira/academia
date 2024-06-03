@@ -17,5 +17,7 @@ class PessoaModel extends Model
         'data_nascimento',
         'senha',
         'email',
+        'created_at' ,
+        'updated_at ',
     ];
 }

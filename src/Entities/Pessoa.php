@@ -4,21 +4,49 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use Carbon\Carbon;
+
+
+
 class Pessoa extends AbstractEntity
 {
     private ?int $endereco_id;
     private ?string $nome;
     private ?string $cpf;
-    private ?string $altura;
-    private ?string $peso;
-    private ?string $data_matricula;
-    private ?string $data_nascimento;
+    private ?float $altura;
+    private ?float $peso;
+    private  $data_matricula;
+    private  $data_nascimento;
     private ?string $senha;
     private ?string $email;
+    private ?Carbon $created_at;
+    private ?Carbon $updated_at;
 
     public function getEnderecoId(): ?int
     {
         return $this->endereco_id;
+    }
+
+    public function getCreatedAt(): ?Carbon
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(?Carbon $created_at): Pessoa
+    {
+        $this->created_at = $created_at;
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?Carbon
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?Carbon $updated_at): Pessoa
+    {
+        $this->updated_at = $updated_at;
+        return $this;
     }
 
     public function setEnderecoId(?int $endereco_id): Pessoa
@@ -49,45 +77,45 @@ class Pessoa extends AbstractEntity
         return $this;
     }
 
-    public function getAltura(): ?string
+    public function getAltura(): ?float
     {
         return $this->altura;
     }
 
-    public function setAltura(?string $altura): Pessoa
+    public function setAltura(?float $altura): Pessoa
     {
         $this->altura = $altura;
         return $this;
     }
 
-    public function getPeso(): ?string
+    public function getPeso(): ?float
     {
         return $this->peso;
     }
 
-    public function setPeso(?string $peso): Pessoa
+    public function setPeso(?float $peso): Pessoa
     {
         $this->peso = $peso;
         return $this;
     }
 
-    public function getDataMatricula(): ?string
+    public function getDataMatricula(): mixed
     {
         return $this->data_matricula;
     }
 
-    public function setDataMatricula(?string $data_matricula): Pessoa
+    public function setDataMatricula(mixed $data_matricula): Pessoa
     {
         $this->data_matricula = $data_matricula;
         return $this;
     }
 
-    public function getDataNascimento(): ?string
+    public function getDataNascimento(): mixed
     {
         return $this->data_nascimento;
     }
 
-    public function setDataNascimento(?string $data_nascimento): Pessoa
+    public function setDataNascimento(mixed $data_nascimento): Pessoa
     {
         $this->data_nascimento = $data_nascimento;
         return $this;
@@ -103,7 +131,6 @@ class Pessoa extends AbstractEntity
         $this->senha = $senha;
         return $this;
     }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -122,13 +149,16 @@ class Pessoa extends AbstractEntity
             ->hydrate($item)
             ->setEnderecoId($item->endereco_id ?? null)
             ->setNome($item->nome ?? null)
-            ->setCpf($item->cpf ?? null)
+            ->setCpf(isset($item->cpf) ? (string)$item->cpf : null)
             ->setAltura($item->altura ?? null)
             ->setPeso($item->peso ?? null)
-            ->setDatamatricula($item->data_matricula ?? null)
-            ->setDatanascimento($item->data_nascimento ?? null)
-            ->setSenha($item->senha ?? null)
+            ->setDataMatricula(isset($item->data_matricula) ? Carbon::createFromFormat('Y-m-d', $item->data_matricula) : null)
+            ->setDataNascimento(isset($item->data_nascimento) ? Carbon::createFromFormat('Y-m-d', $item->data_matricula) : null)
+            ->setSenha((string)($item->senha ?? null))
+
             ->setEmail($item->email ?? null)
+            ->setCreatedAt($item->created_at ?? null)
+            ->setUpdatedAt($item->updated_at ?? null);
         ;
 
         return $entity;

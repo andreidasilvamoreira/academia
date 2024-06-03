@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use App\Action\Personagem\CreatePersonagemAction;
 use App\Action\Pessoas\FindAllPessoasAction;
+use App\Action\Pessoas\FindPessoasAction;
+use App\Action\Pessoas\CreatePessoasAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -30,10 +32,9 @@ return function (App $app) {
         $group->post('', CreatePersonagemAction::class);
     });
 
-
     $app->group('/pessoas', function (Group $group) {
         $group->get('', FindAllPessoasAction::class);
-        $group->get('/{id}', FindPersonagemAction::class);
-        $group->post('', CreatePersonagemAction::class);
+        $group->get('/{id}', FindPessoasAction::class);
+        $group->post('', CreatePessoasAction::class);
     });
 };

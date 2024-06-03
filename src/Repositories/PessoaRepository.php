@@ -24,5 +24,19 @@ class PessoaRepository extends AbstractRepository
             fn(PessoaModel $pessoa) => Pessoa::factory($pessoa->toArray())
         )->toArray();
     }
+    public function find($id): ?Pessoa
+    {
+        $pessoa = $this->pessoa->find($id);
 
+        return $pessoa ? Pessoa::factory($pessoa->toArray()) : null;
+    }
+
+    public function create(Pessoa $pessoa): Pessoa
+    {
+        $pessoaModel = $this->pessoa->query()->create($pessoa->toArray());
+
+        return Pessoa::factory([
+            'id' => $pessoaModel->id,
+        ]);
+    }
 }
