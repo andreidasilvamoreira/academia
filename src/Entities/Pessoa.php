@@ -149,13 +149,12 @@ class Pessoa extends AbstractEntity
             ->hydrate($item)
             ->setEnderecoId($item->endereco_id ?? null)
             ->setNome($item->nome ?? null)
-            ->setCpf(isset($item->cpf) ? (string)$item->cpf : null)
+            ->setCpf($item->cpf ? (string)$item->cpf : null)
             ->setAltura($item->altura ?? null)
             ->setPeso($item->peso ?? null)
-            ->setDataMatricula(isset($item->data_matricula) ? Carbon::createFromFormat('Y-m-d', $item->data_matricula) : null)
-            ->setDataNascimento(isset($item->data_nascimento) ? Carbon::createFromFormat('Y-m-d', $item->data_matricula) : null)
-            ->setSenha((string)($item->senha ?? null))
-
+            ->setDataMatricula($item->data_matricula ?? null)
+            ->setDataNascimento($item->data_nascimento ?? null)
+            ->setSenha($item->senha ? (string)$item->senha : null)
             ->setEmail($item->email ?? null)
             ->setCreatedAt($item->created_at ?? null)
             ->setUpdatedAt($item->updated_at ?? null);

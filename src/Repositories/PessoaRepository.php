@@ -33,10 +33,29 @@ class PessoaRepository extends AbstractRepository
 
     public function create(Pessoa $pessoa): Pessoa
     {
-        $pessoaModel = $this->pessoa->query()->create($pessoa->toArray());
+        $pessoaModel = $this->pessoa->query()->create($this->dataCreate($pessoa));
 
-        return Pessoa::factory([
-            'id' => $pessoaModel->id,
-        ]);
+        return $pessoa->setId(
+            $pessoaModel->id
+        );
+
     }
+
+    public function dataCreate(Pessoa $pessoa)
+    {
+        return [
+            'endereco_id' => $pessoa->getEnderecoId(),
+            'nome' => $pessoa->getNome(),
+            'cpf' => $pessoa->getCpf(),
+            'altura' => $pessoa->getAltura(),
+            'peso' => $pessoa->getPeso(),
+            'data_matricula' => $pessoa->getDataMatricula(),
+            'data_nascimento' => $pessoa->getDataNascimento(),
+            'senha' => $pessoa->getSenha(),
+            'email' => $pessoa->getEmail(),
+            'created_at' => $pessoa->getCreatedAt(),
+            'updated_at' => $pessoa->getUpdatedAt()
+        ];
+    }
+
 }
