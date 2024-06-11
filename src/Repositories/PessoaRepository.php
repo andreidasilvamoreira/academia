@@ -38,12 +38,45 @@ class PessoaRepository extends AbstractRepository
         return $pessoa->setId(
             $pessoaModel->id
         );
-
     }
+
+    public function update(Pessoa $pessoa)
+    {
+        $pessoaModel = $this->pessoa->query()->findOrFail($pessoa->getId());
+
+        if ($pessoaModel) {
+            $pessoaUpdate = $this->pessoa->query()->update($this->dataUpdate($pessoa));
+            if ($pessoaUpdate){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+
 
     public function dataCreate(Pessoa $pessoa)
     {
         return [
+            'endereco_id' => $pessoa->getEnderecoId(),
+            'nome' => $pessoa->getNome(),
+            'cpf' => $pessoa->getCpf(),
+            'altura' => $pessoa->getAltura(),
+            'peso' => $pessoa->getPeso(),
+            'data_matricula' => $pessoa->getDataMatricula(),
+            'data_nascimento' => $pessoa->getDataNascimento(),
+            'senha' => $pessoa->getSenha(),
+            'email' => $pessoa->getEmail(),
+            'created_at' => $pessoa->getCreatedAt(),
+            'updated_at' => $pessoa->getUpdatedAt()
+        ];
+    }
+
+    public function dataUpdate(Pessoa $pessoa)
+    {
+        return [
+            'id' => $pessoa->getId(),
             'endereco_id' => $pessoa->getEnderecoId(),
             'nome' => $pessoa->getNome(),
             'cpf' => $pessoa->getCpf(),

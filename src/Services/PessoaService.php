@@ -26,4 +26,9 @@ class PessoaService
         return $this->pessoaRepository->create($pessoa);
     }
 
+    public function update(Pessoa $pessoa)
+    {
+        $this->pessoaRepository->update($pessoa);
+    }
+
 }

@@ -6,8 +6,7 @@ use App\Action\Personagem\CreatePersonagemAction;
 use App\Action\Pessoas\FindAllPessoasAction;
 use App\Action\Pessoas\FindPessoasAction;
 use App\Action\Pessoas\CreatePessoasAction;
-use App\Application\Actions\User\ListUsersAction;
-use App\Application\Actions\User\ViewUserAction;
+use App\Action\Pessoas\UpdatePessoaAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -36,5 +35,6 @@ return function (App $app) {
         $group->get('', FindAllPessoasAction::class);
         $group->get('/{id}', FindPessoasAction::class);
         $group->post('', CreatePessoasAction::class);
+        $group->post('/{id}', UpdatePessoaAction::class);
     });
 };

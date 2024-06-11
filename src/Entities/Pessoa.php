@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Entities;
 
 use Carbon\Carbon;
-
+use function DI\string;
 
 
 class Pessoa extends AbstractEntity
@@ -144,20 +144,19 @@ class Pessoa extends AbstractEntity
     public static function factory($item): self
     {
         $item = is_array($item) ? (object)$item : $item;
-
         $entity = (new self())
             ->hydrate($item)
-            ->setEnderecoId($item->endereco_id ?? null)
-            ->setNome($item->nome ?? null)
+            ->setEnderecoId($item->endereco_id ? (int)$item->endereco_id : null)
+            ->setNome($item->nome ? (string)$item->nome : null)
             ->setCpf($item->cpf ? (string)$item->cpf : null)
-            ->setAltura($item->altura ?? null)
-            ->setPeso($item->peso ?? null)
+            ->setAltura($item->altura ? (float)$item->altura : null)
+            ->setPeso($item->peso ? (float)$item->peso : null)
             ->setDataMatricula($item->data_matricula ?? null)
-            ->setDataNascimento($item->data_nascimento ?? null)
+            ->setDataNascimento($item->data_nascimento  ?? null)
             ->setSenha($item->senha ? (string)$item->senha : null)
-            ->setEmail($item->email ?? null)
-            ->setCreatedAt($item->created_at ?? null)
-            ->setUpdatedAt($item->updated_at ?? null);
+            ->setEmail($item->email ? (string)$item->email : null)
+            ->setCreatedAt($item->created_at ? Carbon::parse($item->created_at) : null)
+            ->setUpdatedAt($item->updated_at ? Carbon::parse($item->updated_at) : null)
         ;
 
         return $entity;
