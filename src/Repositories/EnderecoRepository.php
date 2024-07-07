@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use _PHPStan_11268e5ee\Nette\Neon\Exception;
 use App\Entities\Endereco;
 use App\Models\EnderecoModel;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -45,7 +44,7 @@ class EnderecoRepository extends AbstractRepository
             $enderecoModel = EnderecoModel::query()->find($endereco->getId());
 
             if (!$enderecoModel) {
-                throw new Exception('Endereço não existe na base de dados');
+                throw new \Exception('Endereço não existe na base de dados');
             }
 
             $enderecoModel->fill($this->dataUpdate($endereco));
