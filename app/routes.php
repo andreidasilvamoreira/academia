@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Action\Enderecos\CreateEnderecoAction;
+use App\Action\Enderecos\FindAllEnderecosAction;
+use App\Action\Enderecos\FindEnderecoAction;
+use App\Action\Enderecos\UpdateEnderecoAction;
 use App\Action\Personagem\CreatePersonagemAction;
 use App\Action\Pessoas\FindAllPessoasAction;
 use App\Action\Pessoas\FindPessoasAction;
@@ -21,7 +25,7 @@ return function (App $app) {
     });
 
     $app->get('/', function (Request $request, Response $response) {
-        $response->getBody()->write('Hello world!');
+        $response->getBody()->write('Server on!');
         return $response;
     });
 
@@ -36,5 +40,12 @@ return function (App $app) {
         $group->get('/{id}', FindPessoasAction::class);
         $group->post('', CreatePessoasAction::class);
         $group->post('/{id}', UpdatePessoaAction::class);
+    });
+
+    $app->group('/enderecos', function (Group $group) {
+        $group->get('', FindAllEnderecosAction::class);
+        $group->get('/{id}', FindEnderecoAction::class);
+        $group->post('', CreateEnderecoAction::class);
+        $group->post('/{id}', UpdateEnderecoAction::class);
     });
 };
