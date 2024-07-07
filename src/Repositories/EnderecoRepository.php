@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Domain\User\UserNotFoundException;
+use _PHPStan_11268e5ee\Nette\Neon\Exception;
 use App\Entities\Endereco;
 use App\Models\EnderecoModel;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EnderecoRepository extends AbstractRepository
 {
-
     public function __construct(private EnderecoModel $endereco)
     {
     }
@@ -26,35 +26,34 @@ class EnderecoRepository extends AbstractRepository
     }
     public function find($id): ?Endereco
     {
-        $endereco = $this->endereco->find($id);
+        $endereco = $this->endereco->query()->find($id);
 
         return $endereco ? Endereco::factory($endereco->toArray()) : null;
     }
 
     public function create(Endereco $endereco): Endereco
     {
-        $pessoaModel = $this->endereco->query()->create($this->dataCreate($endereco));
+        $enderecoModel = new EnderecoModel($this->dataCreate($endereco));
+        $enderecoModel->save();
 
-        return $endereco->setId(
-            $pessoaModel->id
-        );
+        return $endereco->setId($enderecoModel->getKey());
     }
 
-    public function update(Endereco $endereco)
+    public function update(Endereco $endereco): bool
     {
-        $pessoaModel = $this->endereco->query()->findOrFail($endereco->getId());
+        try {
+            $enderecoModel = EnderecoModel::query()->find($endereco->getId());
 
-        if ($pessoaModel) {
-            $pessoaUpdate = $this->endereco->query()->update($this->dataUpdate($endereco));
-            if ($pessoaUpdate){
-                return true;
-            } else {
-                return false;
+            if (!$enderecoModel) {
+                throw new Exception('Endereço não existe na base de dados');
             }
+
+            $enderecoModel->fill($this->dataUpdate($endereco));
+            return $enderecoModel->save();
+        } catch (ModelNotFoundException) {
+            return false;
         }
     }
-
-
 
     public function dataCreate(Endereco $endereco)
     {
@@ -79,5 +78,4 @@ class EnderecoRepository extends AbstractRepository
             'rua' => $endereco->getRua(),
         ];
     }
-
 }
