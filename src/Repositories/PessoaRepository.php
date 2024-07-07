@@ -8,7 +8,6 @@ use App\Models\PessoaModel;
 
 class PessoaRepository extends AbstractRepository
 {
-
     public function __construct(private PessoaModel $pessoa)
     {
     }
@@ -33,30 +32,47 @@ class PessoaRepository extends AbstractRepository
 
     public function create(Pessoa $pessoa): Pessoa
     {
-        $pessoaModel = $this->pessoa->query()->create($this->dataCreate($pessoa));
+        $pessoaModel = $this->pessoa->query()->create($this->preparaDadosParaCreate($pessoa));
 
         return $pessoa->setId(
             $pessoaModel->id
         );
     }
 
-    public function update(Pessoa $pessoa)
+
+    /**
+     * @param Pessoa $pessoa
+     * @return bool
+     */
+    public function update(Pessoa $pessoa): bool
     {
         $pessoaModel = $this->pessoa->query()->findOrFail($pessoa->getId());
 
         if ($pessoaModel) {
-            $pessoaUpdate = $this->pessoa->query()->update($this->dataUpdate($pessoa));
-            if ($pessoaUpdate){
+            $pessoaUpdate = $this->pessoa->query()->update($this->preparaDadosParaUpdate($pessoa));
+
+            if ($pessoaUpdate) {
                 return true;
             } else {
                 return false;
             }
         }
+
+        return false;
     }
 
+    public function delete(int $id)
+    {
+        $pessoaModel = PessoaModel::query()->find($id);
 
+        if (!$pessoaModel) {
+            throw new \Exception('Pessoa não existe na base de dados');
+        }
 
-    public function dataCreate(Pessoa $pessoa)
+        return $pessoaModel->delete();
+    }
+
+    public function preparaDadosParaCreate(Pessoa $pessoa): array
     {
         return [
             'endereco_id' => $pessoa->getEnderecoId(),
@@ -73,7 +89,7 @@ class PessoaRepository extends AbstractRepository
         ];
     }
 
-    public function dataUpdate(Pessoa $pessoa)
+    public function preparaDadosParaUpdate(Pessoa $pessoa): array
     {
         return [
             'id' => $pessoa->getId(),
@@ -85,10 +101,7 @@ class PessoaRepository extends AbstractRepository
             'data_matricula' => $pessoa->getDataMatricula(),
             'data_nascimento' => $pessoa->getDataNascimento(),
             'senha' => $pessoa->getSenha(),
-            'email' => $pessoa->getEmail(),
-            'created_at' => $pessoa->getCreatedAt(),
-            'updated_at' => $pessoa->getUpdatedAt()
+            'email' => $pessoa->getEmail()
         ];
     }
-
 }
