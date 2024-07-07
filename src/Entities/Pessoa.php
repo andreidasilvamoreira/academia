@@ -19,34 +19,10 @@ class Pessoa extends AbstractEntity
     private  $data_nascimento;
     private ?string $senha;
     private ?string $email;
-    private ?Carbon $created_at;
-    private ?Carbon $updated_at;
 
     public function getEnderecoId(): ?int
     {
         return $this->endereco_id;
-    }
-
-    public function getCreatedAt(): ?Carbon
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(?Carbon $created_at): Pessoa
-    {
-        $this->created_at = $created_at;
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?Carbon
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(?Carbon $updated_at): Pessoa
-    {
-        $this->updated_at = $updated_at;
-        return $this;
     }
 
     public function setEnderecoId(?int $endereco_id): Pessoa
@@ -155,8 +131,6 @@ class Pessoa extends AbstractEntity
             ->setDataNascimento($item->data_nascimento  ?? null)
             ->setSenha($item->senha ? (string)$item->senha : null)
             ->setEmail($item->email ? (string)$item->email : null)
-            ->setCreatedAt($item->created_at ? Carbon::parse($item->created_at) : null)
-            ->setUpdatedAt($item->updated_at ? Carbon::parse($item->updated_at) : null)
         ;
 
         return $entity;
