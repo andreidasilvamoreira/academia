@@ -6,18 +6,25 @@ namespace App\Entities;
 
 class Endereco extends AbstractEntity
 {
-    private ?string $CEP;
+    private ?int $CEP;
     private ?string $rua;
     private ?string $bairro;
     private ?string $cidade;
     private ?string $complemento;
 
-    public function getCEP(): ?string
+    /**
+     * @return int|null
+     */
+    public function getCEP(): ?int
     {
         return $this->CEP;
     }
 
-    public function setCEP(?string $CEP): Endereco
+    /**
+     * @param int|null $CEP
+     * @return Endereco
+     */
+    public function setCEP(?int $CEP): Endereco
     {
         $this->CEP = $CEP;
         return $this;
