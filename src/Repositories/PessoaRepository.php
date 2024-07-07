@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Domain\User\UserNotFoundException;
 use App\Entities\Pessoa;
 use App\Models\PessoaModel;
 
@@ -25,7 +24,7 @@ class PessoaRepository extends AbstractRepository
     }
     public function find($id): ?Pessoa
     {
-        $pessoa = $this->pessoa->find($id);
+        $pessoa = $this->pessoa->query()->find($id);
 
         return $pessoa ? Pessoa::factory($pessoa->toArray()) : null;
     }
