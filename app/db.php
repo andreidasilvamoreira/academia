@@ -8,7 +8,7 @@ $capsule->addConnection([
     'driver'    => env('DB_DRIVER', 'mysql'),
     'port'      => env('DB_PORT', 3306),
     'host'      => env('DB_HOST', 'localhost'),
-    'database'  => env('DB_DATABASE', 'academia_dedei'),
+    'database'  => env('DB_DATABASE', 'academia'),
     'username'  => env('DB_USERNAME', 'root'),
     'password'  => env('DB_PASSWORD', 'admin'),
     'charset'   => 'utf8',

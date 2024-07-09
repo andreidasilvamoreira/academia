@@ -2,28 +2,26 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Pessoas;
+namespace App\Action\Modalidades;
 
 use App\Action\Action;
-use App\Services\PessoaService;
+use App\Services\ModalidadeService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
-class FindPessoasAction extends Action
+class FindAllModalidadesAction extends Action
 {
     public function __construct(
         protected LoggerInterface $logger,
-        private PessoaService $pessoaService
-
+        private ModalidadeService $modalidadeService
     ) {
         parent::__construct($logger);
     }
 
     protected function action(): Response
     {
-        $idPessoa = $this->request->getAttribute('id');
-        $pessoa = $this->pessoaService->find($idPessoa);
+        $modalidades = $this->modalidadeService->findAll();
 
-        return $this->respondWithData($pessoa);
+        return $this->respondWithData($modalidades);
     }
 }

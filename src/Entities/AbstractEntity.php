@@ -2,14 +2,14 @@
 
 namespace App\Entities;
 
+use App\Traits\Attr\Id;
 use App\Utils\Serializable;
 
 class AbstractEntity extends Serializable
 {
+    use Id;
     const UPDATED_AT = 'updated_at';
     const CREATED_AT = 'created_at';
-
-    private ?int $id;
 
     /**
      * @var Carbon|null
@@ -22,17 +22,6 @@ class AbstractEntity extends Serializable
      * @OA\Property(property="data_alteracao", type="string", format="date-time")
      */
     private $updated_at;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function setId(?int $id): AbstractEntity
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     /**
      * @return Carbon|null
@@ -73,7 +62,7 @@ class AbstractEntity extends Serializable
     protected function hydrate($data)
     {
         $data = is_array($data) ? (object)$data : $data;
-        $this->setId($data->id ?? null);
+        $this->setId($data->id ? (int)$data->id : null);
         $this->setCreatedAt($data->{self::CREATED_AT} ?? null);
         $this->setUpdatedAt($data->{self::UPDATED_AT} ?? null);
 

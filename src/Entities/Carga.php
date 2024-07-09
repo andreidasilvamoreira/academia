@@ -6,14 +6,14 @@ namespace App\Entities;
 
 class Carga extends AbstractEntity
 {
-    private ?string $numero_cargas;
+    private ?int $numero_cargas;
 
-    public function getNumeroCargas(): ?string
+    public function getNumeroCargas(): ?int
     {
         return $this->numero_cargas;
     }
 
-    public function setNumeroCargas(?string $numero_cargas): Carga
+    public function setNumeroCargas(?int $numero_cargas): Carga
     {
         $this->numero_cargas = $numero_cargas;
         return $this;

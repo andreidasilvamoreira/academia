@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ModalidadeModel extends Model
 {
+
+    public $timestamps = false;
+
     protected $table = 'Modalidades';
     protected $fillable = [
         'nome',

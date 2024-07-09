@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use App\Traits\Attr\Id;
+
 class Academia extends AbstractEntity
 {
     private ?string $nome;
-    private ?string $telefone;
+    private ?int $telefone;
     private ?string $horario_funcionamento_abertura;
     private ?string $horario_funcionamento_fechamento;
-    private ?string $endereco_id;
+    private ?int $endereco_id;
 
     public function getNome(): ?string
     {
@@ -23,12 +25,19 @@ class Academia extends AbstractEntity
         return $this;
     }
 
-    public function getTelefone(): ?string
+    /**
+     * @return int|null
+     */
+    public function getTelefone(): ?int
     {
         return $this->telefone;
     }
 
-    public function setTelefone(?string $telefone): Academia
+    /**
+     * @param int|null $telefone
+     * @return Academia
+     */
+    public function setTelefone(?int $telefone): Academia
     {
         $this->telefone = $telefone;
         return $this;
@@ -56,12 +65,12 @@ class Academia extends AbstractEntity
         return $this;
     }
 
-    public function getEnderecoId(): ?string
+    public function getEnderecoId(): ?int
     {
         return $this->endereco_id;
     }
 
-    public function setEnderecoId(?string $endereco_id): Academia
+    public function setEnderecoId(?int $endereco_id): Academia
     {
         $this->endereco_id = $endereco_id;
         return $this;
