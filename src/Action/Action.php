@@ -71,7 +71,7 @@ abstract class Action
     }
 
     /**
-     * @param array|object|null $data
+     * @param array|object|null|bool $data
      */
     protected function respondWithData($data = null, int $statusCode = 200): Response
     {

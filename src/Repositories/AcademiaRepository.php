@@ -48,8 +48,9 @@ class AcademiaRepository extends AbstractRepository
             }
 
             $academiaModel->fill($this->dataUpdate($academia));
+
             return $academiaModel->save();
-        } catch (ModelNotFoundException) {
+        } catch (ModelNotFoundException $exception) {
             return false;
         }
     }

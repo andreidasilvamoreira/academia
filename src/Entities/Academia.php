@@ -8,6 +8,8 @@ use App\Traits\Attr\Id;
 
 class Academia extends AbstractEntity
 {
+
+
     private ?string $nome;
     private ?int $telefone;
     private ?string $horario_funcionamento_abertura;

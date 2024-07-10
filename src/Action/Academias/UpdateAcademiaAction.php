@@ -24,7 +24,7 @@ class UpdateAcademiaAction extends Action
         $idAcademia = $this->request->getAttribute('id');
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
-        $academiaEntity = Academia::factory($data)->setId($idAcademia);
+        $academiaEntity = Academia::factory($data)->setId((int)$idAcademia);
         $academiaCriado = $this->academiaService->update($academiaEntity);
 
         return $this->respondWithData($academiaCriado);

@@ -7,7 +7,7 @@ namespace App\Entities;
 class Modalidade extends AbstractEntity
 {
     private ?string $nome;
-    private ?string $slug   ;
+    private ?string $slug;
     private ?string $descricao;
     private ?string $objetivo;
 

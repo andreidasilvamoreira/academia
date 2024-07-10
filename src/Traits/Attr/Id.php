@@ -5,23 +5,23 @@ namespace App\Traits\Attr;
 trait Id
 {
     /**
-     * @var int
+     * @var ?mixed
      */
-    protected $id;
+    protected mixed $id;
 
     /**
-     * @return int
+     * @return mixed|null
      */
-    public function getId(): int
+    public function getId(): mixed
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * @param mixed|null $id
      * @return self
      */
-    public function setId(int $id): self
+    public function setId(mixed $id): self
     {
         $this->id = $id;
         return $this;
