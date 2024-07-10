@@ -9,7 +9,7 @@ class AbstractEntity extends Serializable
     const UPDATED_AT = 'updated_at';
     const CREATED_AT = 'created_at';
 
-    private ?int $id;
+    private mixed $id;
 
     /**
      * @return int|null
@@ -19,13 +19,9 @@ class AbstractEntity extends Serializable
         return $this->id;
     }
 
-    /**
-     * @param int|null $id
-     * @return AbstractEntity
-     */
-    public function setId(?int $id): AbstractEntity
+    public function setId(mixed $id): self
     {
-        $this->id = $id;
+        $this->id = $id ? (int)$id : null;
         return $this;
     }
 
