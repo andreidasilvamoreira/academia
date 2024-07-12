@@ -82,16 +82,13 @@ class PessoaRepository extends AbstractRepository
             'data_matricula' => $pessoa->getDataMatricula(),
             'data_nascimento' => $pessoa->getDataNascimento(),
             'senha' => $pessoa->getSenha(),
-            'email' => $pessoa->getEmail(),
-            'created_at' => $pessoa->getCreatedAt(),
-            'updated_at' => $pessoa->getUpdatedAt()
+            'email' => $pessoa->getEmail()
         ];
     }
 
     public function preparaDadosParaUpdate(Pessoa $pessoa): array
     {
         return [
-            'id' => $pessoa->getId(),
             'endereco_id' => $pessoa->getEnderecoId(),
             'nome' => $pessoa->getNome(),
             'cpf' => $pessoa->getCpf(),
