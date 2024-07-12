@@ -4,10 +4,10 @@ namespace App\Services;
 
 use App\Entities\Pessoa;
 use App\Repositories\PessoaRepository;
+use Illuminate\Support\Facades\DB;
 
 class PessoaService
 {
-
     public function __construct(private PessoaRepository $pessoaRepository)
     {
     }
@@ -28,7 +28,14 @@ class PessoaService
 
     public function update(Pessoa $pessoa)
     {
-        $this->pessoaRepository->update($pessoa);
-    }
+        try {
+            $this->pessoaRepository->initTransaction();
 
+            $this->pessoaRepository->update($pessoa);
+
+            $this->pessoaRepository->commitTransaction();
+        } catch (\Exception $e) {
+            $this->pessoaRepository->rollBackTransaction();
+        }
+    }
 }
