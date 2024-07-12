@@ -3,21 +3,40 @@
 namespace App\Repositories;
 
 use App\Utils\Str;
-use Illuminate\Database\Connection;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\ConnectionInterface;
+
 abstract class AbstractRepository
 {
-    protected Connection $db;
+    protected ConnectionInterface $db;
+
+    public function __construct()
+    {
+        $this->initDb();
+    }
+
+    protected function initDb()
+    {
+        $this->db = Model::getConnectionResolver()->connection();
+    }
 
     abstract protected function getTableName(): string;
 
+    /**
+     * @throws \Throwable
+     */
     public function initTransaction(): void
     {
+        $this->ensureDbInitialized();
         $this->db->beginTransaction();
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function commitTransaction(): void
     {
+        $this->ensureDbInitialized();
         $this->db->commit();
     }
 
@@ -26,13 +45,10 @@ abstract class AbstractRepository
      */
     public function rollBackTransaction(): void
     {
+        $this->ensureDbInitialized();
         $this->db->rollBack();
     }
 
-    protected function getQuery(string $alias = null, $softDelete = true): Builder
-    {
-        return  $this->db->query()->from($this->getTableName(), $alias);
-    }
 
     /**
      * @param string[] $withAssociations
@@ -45,5 +61,12 @@ abstract class AbstractRepository
             fn($item) => Str::camel($item),
             array_intersect($withAssociations, $withAssociationsSupported)
         );
+    }
+
+    protected function ensureDbInitialized()
+    {
+        if (!isset($this->db)) {
+            $this->initDb();
+        }
     }
 }
