@@ -9,11 +9,16 @@ use App\Settings\SettingsInterface;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
+use Dotenv\Dotenv;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 // Configuração do Eloquent
 $db = require __DIR__ . '/../app/db.php';
+
+// Carrega as variáveis de ambiente do arquivo .env
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
