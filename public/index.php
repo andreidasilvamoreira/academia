@@ -13,12 +13,12 @@ use Dotenv\Dotenv;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-// Configuração do Eloquent
-$db = require __DIR__ . '/../app/db.php';
-
 // Carrega as variáveis de ambiente do arquivo .env
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
+
+// Configuração do Eloquent
+$db = require __DIR__ . '/../app/db.php';
 
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
@@ -42,10 +42,16 @@ $repositories($containerBuilder);
 // Build PHP-DI Container instance
 $container = $containerBuilder->build();
 
+$container->set('db', function () use ($db) {
+    return $db->getConnection();
+});
+
 // Instantiate the app
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 $callableResolver = $app->getCallableResolver();
+
+//$app->getContainer()->get('db');
 
 // Register middleware
 $middleware = require __DIR__ . '/../app/middleware.php';

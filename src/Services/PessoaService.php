@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Entities\Pessoa;
 use App\Repositories\PessoaRepository;
-use Illuminate\Support\Facades\DB;
 
 class PessoaService
 {

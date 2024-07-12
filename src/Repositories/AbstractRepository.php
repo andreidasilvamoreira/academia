@@ -3,21 +3,14 @@
 namespace App\Repositories;
 
 use App\Utils\Str;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 abstract class AbstractRepository
 {
-    protected ConnectionInterface $db;
 
-    public function __construct()
+    protected function getDb()
     {
-        $this->initDb();
-    }
-
-    protected function initDb()
-    {
-        $this->db = Model::getConnectionResolver()->connection();
+        return Capsule::connection();
     }
 
     abstract protected function getTableName(): string;
@@ -27,8 +20,7 @@ abstract class AbstractRepository
      */
     public function initTransaction(): void
     {
-        $this->ensureDbInitialized();
-        $this->db->beginTransaction();
+        $this->getDb()->beginTransaction();
     }
 
     /**
@@ -36,8 +28,7 @@ abstract class AbstractRepository
      */
     public function commitTransaction(): void
     {
-        $this->ensureDbInitialized();
-        $this->db->commit();
+        $this->getDb()->commit();
     }
 
     /**
@@ -45,10 +36,8 @@ abstract class AbstractRepository
      */
     public function rollBackTransaction(): void
     {
-        $this->ensureDbInitialized();
-        $this->db->rollBack();
+        $this->getDb()->rollBack();
     }
-
 
     /**
      * @param string[] $withAssociations
@@ -61,12 +50,5 @@ abstract class AbstractRepository
             fn($item) => Str::camel($item),
             array_intersect($withAssociations, $withAssociationsSupported)
         );
-    }
-
-    protected function ensureDbInitialized()
-    {
-        if (!isset($this->db)) {
-            $this->initDb();
-        }
     }
 }

@@ -15,5 +15,7 @@ $capsule->addConnection([
     'collation' => 'utf8_unicode_ci',
 ]);
 
+$capsule->setAsGlobal();
 $capsule->bootEloquent();
 
+return $capsule;
