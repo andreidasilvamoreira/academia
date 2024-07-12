@@ -48,7 +48,7 @@ class PessoaRepository extends AbstractRepository
         $pessoaModel = $this->pessoa->query()->findOrFail($pessoa->getId());
 
         if ($pessoaModel) {
-            $pessoaUpdate = $this->pessoa->query()->update($this->preparaDadosParaUpdate($pessoa));
+            $pessoaUpdate = $this->pessoa->update($this->preparaDadosParaUpdate($pessoa));
 
             if ($pessoaUpdate) {
                 return true;
