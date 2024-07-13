@@ -7,10 +7,21 @@ namespace App\Entities;
 class Checkin extends AbstractEntity
 {
     private ?string $data_check_in;
-    private ?string $duracao_treino;
-    private ?string $motivo_status;
-    private ?string $pessoa_id;
-    private ?string $status_id;
+    private ?int $duracao_treino;
+    private ?string $motivos_status;
+    private ?int $pessoa_id;
+    private ?int $status_id;
+
+
+    public function getMotivosStatus(): ?string
+    {
+        return $this->motivos_status;
+    }
+    public function setMotivosStatus(?string $motivos_status): Checkin
+    {
+        $this->motivos_status = $motivos_status;
+        return $this;
+    }
 
     public function getDataCheckIn(): ?string
     {
@@ -23,45 +34,34 @@ class Checkin extends AbstractEntity
         return $this;
     }
 
-    public function getDuracaoTreino(): ?string
+    public function getDuracaoTreino(): ?int
     {
         return $this->duracao_treino;
     }
 
-    public function setDuracaoTreino(?string $duracao_treino): Checkin
+    public function setDuracaoTreino(?int $duracao_treino): Checkin
     {
         $this->duracao_treino = $duracao_treino;
         return $this;
     }
 
-    public function getMotivoStatus(): ?string
-    {
-        return $this->motivo_status;
-    }
-
-    public function setMotivoStatus(?string $motivo_status): Checkin
-    {
-        $this->motivo_status = $motivo_status;
-        return $this;
-    }
-
-    public function getPessoaId(): ?string
+    public function getPessoaId(): ?int
     {
         return $this->pessoa_id;
     }
 
-    public function setPessoaId(?string $pessoa_id): Checkin
+    public function setPessoaId(?int $pessoa_id): Checkin
     {
         $this->pessoa_id = $pessoa_id;
         return $this;
     }
 
-    public function getStatusId(): ?string
+    public function getStatusId(): ?int
     {
         return $this->status_id;
     }
 
-    public function setStatusId(?string $status_id): Checkin
+    public function setStatusId(?int $status_id): Checkin
     {
         $this->status_id = $status_id;
         return $this;
@@ -76,7 +76,7 @@ class Checkin extends AbstractEntity
             ->hydrate($item)
             ->setDataCheckIn($item->data_check_in ?? null)
             ->setDuracaoTreino($item->duracao_treino ?? null)
-            ->setMotivoStatus($item->motivo_status ?? null)
+            ->setMotivosStatus($item->motivos_status ?? null)
             ->setPessoaId($item->pessoa_id ?? null)
             ->setStatusId($item->status_id ?? null)
         ;

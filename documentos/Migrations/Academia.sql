@@ -84,7 +84,7 @@ CREATE TABLE Checkins (
     id INT PRIMARY KEY AUTO_INCREMENT,
     data_check_in DATETIME NOT NULL,
     duracao_treino INT NOT NULL,
-    motivos_status VARCHAR(45) NOT NULL,
+    motivo_status VARCHAR(45) NOT NULL,
     pessoa_id INT NOT NULL,
     status_id INT NOT NULL,
     FOREIGN KEY (pessoa_id) REFERENCES Pessoas(id),
