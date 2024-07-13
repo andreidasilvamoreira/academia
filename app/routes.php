@@ -6,6 +6,10 @@ use App\Action\Academias\CreateAcademiaAction;
 use App\Action\Academias\FindAcademiaAction;
 use App\Action\Academias\FindAllAcademiasAction;
 use App\Action\Academias\UpdateAcademiaAction;
+use App\Action\Checkins\CreateCheckinAction;
+use App\Action\Checkins\FindCheckinAction;
+use App\Action\Checkins\FindAllCheckinsAction;
+use App\Action\Checkins\UpdateCheckinAction;
 use App\Action\Cargas\CreateCargaAction;
 use App\Action\Cargas\FindAllCargasAction;
 use App\Action\Cargas\FindCargaAction;
@@ -80,5 +84,12 @@ return function (App $app) {
         $group->get('/{id}', FindCargaAction::class);
         $group->post('', CreateCargaAction::class);
         $group->post('/{id}', UpdateCargaAction::class);
+    });
+
+    $app->group('/checkins', function (Group $group) {
+        $group->get('', FindAllCheckinsAction::class);
+        $group->get('/{id}', FindCheckinAction::class);
+        $group->post('', CreateCheckinAction::class);
+        $group->post('/{id}', UpdateCheckinAction::class);
     });
 };
