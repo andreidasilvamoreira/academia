@@ -6,6 +6,10 @@ use App\Action\Academias\CreateAcademiaAction;
 use App\Action\Academias\FindAcademiaAction;
 use App\Action\Academias\FindAllAcademiasAction;
 use App\Action\Academias\UpdateAcademiaAction;
+use App\Action\AcademiasModalidade\CreateAcademiaModalidadeAction;
+use App\Action\AcademiasModalidade\FindAcademiaModalidadeAction;
+use App\Action\AcademiasModalidade\FindAllAcademiasModalidadeAction;
+use App\Action\AcademiasModalidade\UpdateAcademiaModalidadeAction;
 use App\Action\Checkins\CreateCheckinAction;
 use App\Action\Checkins\FindCheckinAction;
 use App\Action\Checkins\FindAllCheckinsAction;
@@ -27,6 +31,10 @@ use App\Action\Pessoas\FindAllPessoasAction;
 use App\Action\Pessoas\FindPessoaAction;
 use App\Action\Pessoas\CreatePessoaAction;
 use App\Action\Pessoas\UpdatePessoaAction;
+use App\Action\Series\CreateSerieAction;
+use App\Action\Series\FindAllSeriesAction;
+use App\Action\Series\FindSerieAction;
+use App\Action\Series\UpdateSerieAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -92,4 +100,12 @@ return function (App $app) {
         $group->post('', CreateCheckinAction::class);
         $group->post('/{id}', UpdateCheckinAction::class);
     });
+
+    $app->group('/series', function (Group $group) {
+        $group->get('', FindAllSeriesAction::class);
+        $group->get('/{id}', FindSerieAction::class);
+        $group->post('', CreateSerieAction::class);
+        $group->post('/{id}', UpdateSerieAction::class);
+    });
+
 };

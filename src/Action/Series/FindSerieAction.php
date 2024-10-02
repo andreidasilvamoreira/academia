@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace App\Action\Cargas;
+namespace App\Action\Series;
 
 use App\Action\Action;
-use App\Services\CargaService;
+use App\Services\SerieService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
-class FindCargaAction extends Action
+class FindSerieAction extends Action
 {
     public function __construct(
         protected LoggerInterface $logger,
-        private CargaService $cargaService
+        private SerieService $seriesService,
     ) {
         parent::__construct($logger);
     }
 
     protected function action(): Response
     {
-        $idCarga = $this->request->getAttribute('id');
-        $carga = $this->cargaService->find($idCarga);
+        $idSerie = $this->request->getAttribute('id');
+        $serie = $this->seriesService->find($idSerie);
 
-        return $this->respondWithData($carga);
+        return $this->respondWithData($serie);
     }
 }

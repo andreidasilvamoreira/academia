@@ -6,30 +6,46 @@ namespace App\Entities;
 
 class AcademiaModalidade extends AbstractEntity
 {
-    private ?string $academia_id;
-    private ?string $modalidade_id;
+    private ?int $academia_id;
+    private ?int $modalidade_id;
 
-    public function getAcademiaId(): ?string
+    /**
+     * @return int|null
+     */
+    public function getAcademiaId(): ?int
     {
         return $this->academia_id;
     }
 
-    public function setAcademiaId(?string $academia_id): AcademiaModalidade
+    /**
+     * @param int|null $academia_id
+     * @return AcademiaModalidade
+     */
+    public function setAcademiaId(?int $academia_id): AcademiaModalidade
     {
         $this->academia_id = $academia_id;
         return $this;
     }
 
-    public function getModalidadeId(): ?string
+    /**
+     * @return int|null
+     */
+    public function getModalidadeId(): ?int
     {
         return $this->modalidade_id;
     }
 
-    public function setModalidadeId(?string $modalidade_id): AcademiaModalidade
+    /**
+     * @param int|null $modalidade_id
+     * @return AcademiaModalidade
+     */
+    public function setModalidadeId(?int $modalidade_id): AcademiaModalidade
     {
         $this->modalidade_id = $modalidade_id;
         return $this;
     }
+
+
 
     public static function factory($item): self
     {

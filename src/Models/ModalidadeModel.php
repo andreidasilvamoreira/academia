@@ -16,4 +16,9 @@ class ModalidadeModel extends Model
         'descricao',
         'objetivo',
     ];
+
+    public function academias()
+    {
+        return $this->hasMany(AcademiaModalidadeModel::class, 'modalidade_id');
+    }
 }

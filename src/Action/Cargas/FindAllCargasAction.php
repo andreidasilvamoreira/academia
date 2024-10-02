@@ -6,7 +6,6 @@ namespace App\Action\Cargas;
 
 use App\Action\Action;
 use App\Services\CargaService;
-use App\Services\EnderecoService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 

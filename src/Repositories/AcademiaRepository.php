@@ -19,15 +19,38 @@ class AcademiaRepository extends AbstractRepository
 
     public function findAll(): array
     {
-        return $this->academia->all()->map(
-            fn(AcademiaModel $academia) => Academia::factory($academia->toArray())
-        )->toArray();
-    }
-    public function find($id): ?Academia
-    {
-        $academia = $this->academia->query()->find($id);
+        $academias = $this->academia
+            ->with(['modalidades.modalidade'])
+            ->get();
 
-        return $academia ? Academia::factory($academia->toArray()) : null;
+        $academiasArray = $academias->map(function (AcademiaModel $academia) {
+            $modalidades = $academia->modalidades->map(function ($modalidade) {
+
+                return $modalidade->makeHidden(['academia_id', 'modalidade_id']);
+            });
+
+            return [
+                'id' => $academia->id,
+                'nome' => $academia->nome,
+                'telefone' => $academia->telefone,
+                'modalidades' => $modalidades,
+            ];
+        })->toArray();
+
+        return $academiasArray;
+    }
+    public function find($id): ?AcademiaModel
+    {
+        $academia = $this->academia
+            ->with(['modalidades.modalidade'])
+            ->find($id);
+        if ($academia) {
+            foreach ($academia->modalidades as $modalidade) {
+                    $modalidade->makeHidden(['academia_id', 'modalidade_id']);
+            }
+        }
+
+        return $academia;
     }
 
     public function create(Academia $academia): Academia

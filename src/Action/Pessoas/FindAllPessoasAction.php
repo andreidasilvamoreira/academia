@@ -13,7 +13,7 @@ class FindAllPessoasAction extends Action
 {
     public function __construct(
         protected LoggerInterface $logger,
-        private PessoaService $pessoasService
+        private PessoaService $pessoaService
 
     ) {
         parent::__construct($logger);
@@ -21,8 +21,8 @@ class FindAllPessoasAction extends Action
 
     protected function action(): Response
     {
-        $personagens = $this->pessoasService->findAll();
+        $pessoa = $this->pessoaService->findAll();
 
-        return $this->respondWithData($personagens);
+        return $this->respondWithData($pessoa);
     }
 }

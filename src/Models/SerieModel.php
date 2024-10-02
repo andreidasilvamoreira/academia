@@ -12,4 +12,6 @@ class SerieModel extends Model
         'exercicio_id',
         'carga_id',
     ];
+
+    public $timestamps = null;
 }

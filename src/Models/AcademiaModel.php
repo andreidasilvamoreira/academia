@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\AcademiaModalidadeModel;
 use Illuminate\Database\Eloquent\Model;
 
 class AcademiaModel extends Model
@@ -17,4 +18,9 @@ class AcademiaModel extends Model
         'horario_funcionamento_fechamento',
         'endereco_id',
     ];
+
+    public function modalidades()
+    {
+        return $this->hasMany(AcademiaModalidadeModel::class, 'academia_id');
+    }
 }

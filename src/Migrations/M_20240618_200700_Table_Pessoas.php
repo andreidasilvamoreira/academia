@@ -24,8 +24,8 @@ class M_20240618_200700_Table_Pessoas
         });
     }
 
-    public function down()
-    {
-        $this->schema()->dropIfExists('pessoas');
-    }
+        public function down()
+        {
+            $this->schema()->dropIfExists('pessoas');
+        }
 }

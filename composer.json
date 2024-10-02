@@ -28,8 +28,10 @@
         "monolog/monolog": "^2.8",
         "php-di/php-di": "^6.4",
         "phpoption/phpoption": "^1.9",
+        "robmorgan/phinx": "^0.16.2",
         "slim/psr7": "^1.5",
         "slim/slim": "^4.10",
+        "symfony/console": "^7.1",
         "vlucas/phpdotenv": "^5.6"
     },
     "require-dev": {
