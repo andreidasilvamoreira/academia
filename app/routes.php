@@ -35,6 +35,10 @@ use App\Action\Series\CreateSerieAction;
 use App\Action\Series\FindAllSeriesAction;
 use App\Action\Series\FindSerieAction;
 use App\Action\Series\UpdateSerieAction;
+use App\Action\TipoPessoas\CreateTipoPessoaAction;
+use App\Action\TipoPessoas\FindAllTiposPessoasAction;
+use App\Action\TipoPessoas\FindTipoPessoaAction;
+use App\Action\TipoPessoas\UpdateTipoPessoaAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
@@ -108,4 +112,10 @@ return function (App $app) {
         $group->post('/{id}', UpdateSerieAction::class);
     });
 
+    $app->group('/tiposPessoas', function (Group $group) {
+        $group->get('', FindAllTiposPessoasAction::class);
+        $group->get('/{id}', FindTipoPessoaAction::class);
+        $group->post('', CreateTipoPessoaAction::class);
+        $group->post('/{id}', UpdateTipoPessoaAction::class);
+    });
 };
