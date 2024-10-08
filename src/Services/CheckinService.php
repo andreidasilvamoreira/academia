@@ -31,4 +31,9 @@ class CheckinService
     {
          $this->checkinRepository->update($checkin);
     }
+
+    public function delete($id)
+    {
+        return $this->checkinRepository->delete($id);
+    }
 }

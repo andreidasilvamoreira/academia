@@ -26,4 +26,9 @@ class CargaService
     {
         $this->cargaRepository->update($carga);
     }
+
+    public function delete($id)
+    {
+        return $this->cargaRepository->delete($id);
+    }
 }

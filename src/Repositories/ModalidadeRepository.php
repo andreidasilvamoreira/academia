@@ -60,6 +60,17 @@ class ModalidadeRepository extends AbstractRepository
         }
     }
 
+    public function delete(int $id)
+    {
+        $modalidadeModel = ModalidadeModel::query()->find($id);
+
+        if(!$modalidadeModel) {
+            throw new \Exception('Modalidade nao existe na base de dados');
+        }
+
+        return $modalidadeModel->delete();
+    }
+
     public function dataCreate(Modalidade $modalidade)
     {
         return[

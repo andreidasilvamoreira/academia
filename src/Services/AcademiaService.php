@@ -31,4 +31,8 @@ class AcademiaService
         return $this->academiaRepository->update($academia);
     }
 
+    public function delete($id)
+    {
+        return $this->academiaRepository->delete($id);
+    }
 }

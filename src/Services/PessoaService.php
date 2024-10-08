@@ -37,4 +37,8 @@ class PessoaService
             $this->pessoaRepository->rollBackTransaction();
         }
     }
+    public function delete($id)
+    {
+        return $this->pessoaRepository->delete($id);
+    }
 }

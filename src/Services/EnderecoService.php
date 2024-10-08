@@ -27,4 +27,9 @@ class EnderecoService
     {
         $this->enderecoRepository->update($endereco);
     }
+
+    public function delete($id)
+    {
+        return $this->enderecoRepository->delete($id);
+    }
 }

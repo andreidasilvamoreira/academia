@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Entities\TipoPessoa;
 use App\Models\TipoPessoaModel;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TipoPessoaRepository extends AbstractRepository
 {
@@ -40,23 +39,33 @@ class TipoPessoaRepository extends AbstractRepository
         );
     }
 
-    public function update(TipoPessoa $tipoPessoa)
+    public function update(TipoPessoa $tipoPessoa): bool
     {
-        try {
-            $tipoPessoaModel = TipoPessoaModel::query()->find($tipoPessoa->getId());
+        $tipoPessoaModel = $this->tipoPessoa->query()->findOrFail($tipoPessoa->getId());
 
-            if (!$tipoPessoaModel) {
-                throw new \Exception('Tipo Pessoa não existe na base de dados');
+        if ($tipoPessoaModel) {
+            $tipoPessoaUpdate = $this->tipoPessoa->update($this->dataUpdate($tipoPessoa));
+
+            if ($tipoPessoaUpdate) {
+                return true;
+            } else {
+                return false;
             }
-
-            $tipoPessoaModel->fill($this->dataUpdate($tipoPessoa));
-
-            return $tipoPessoaModel->save();
-        } catch (ModelNotFoundException $exception) {
-            return false;
         }
+
+        return false;
     }
 
+    public function delete($id)
+    {
+        $tipoPessoaModel = TipoPessoaModel::query()->find($id);
+
+        if (!$tipoPessoaModel) {
+            throw new \Exception('TipoPessoa nao existe na base de dados');
+        }
+
+        return $tipoPessoaModel->delete();
+    }
 
     public function dataCreate(TipoPessoa $tipoPessoa)
     {

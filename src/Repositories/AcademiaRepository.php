@@ -4,7 +4,10 @@ namespace App\Repositories;
 
 use App\Entities\Academia;
 use App\Models\AcademiaModel;
+use http\Env\Response;
+use http\Message;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 
 class AcademiaRepository extends AbstractRepository
 {
@@ -76,6 +79,18 @@ class AcademiaRepository extends AbstractRepository
         } catch (ModelNotFoundException $exception) {
             return false;
         }
+    }
+
+    public function delete(int $id)
+    {
+        $academiaModel = AcademiaModel::query()->find($id);
+
+        if (!$academiaModel){
+            throw new \Exception('Academia não existe na base de dados');
+        }
+
+        return $academiaModel->delete();
+
     }
 
     public function dataCreate(Academia $academia)

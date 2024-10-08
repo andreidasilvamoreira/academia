@@ -26,4 +26,9 @@ class ModalidadeService
     {
         $this->modalidadeRepository->update($modalidade);
     }
+
+    public function delete($id)
+    {
+        return $this->modalidadeRepository->delete($id);
+    }
 }

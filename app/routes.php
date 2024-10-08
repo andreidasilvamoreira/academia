@@ -3,14 +3,13 @@
 declare(strict_types=1);
 
 use App\Action\Academias\CreateAcademiaAction;
+use App\Action\Academias\DeleteAcademiaAction;
 use App\Action\Academias\FindAcademiaAction;
 use App\Action\Academias\FindAllAcademiasAction;
 use App\Action\Academias\UpdateAcademiaAction;
-use App\Action\AcademiasModalidade\CreateAcademiaModalidadeAction;
-use App\Action\AcademiasModalidade\FindAcademiaModalidadeAction;
-use App\Action\AcademiasModalidade\FindAllAcademiasModalidadeAction;
-use App\Action\AcademiasModalidade\UpdateAcademiaModalidadeAction;
+use App\Action\Cargas\DeleteCargaAction;
 use App\Action\Checkins\CreateCheckinAction;
+use App\Action\Checkins\DeleteCheckinAction;
 use App\Action\Checkins\FindCheckinAction;
 use App\Action\Checkins\FindAllCheckinsAction;
 use App\Action\Checkins\UpdateCheckinAction;
@@ -19,23 +18,23 @@ use App\Action\Cargas\FindAllCargasAction;
 use App\Action\Cargas\FindCargaAction;
 use App\Action\Cargas\UpdateCargaAction;
 use App\Action\Enderecos\CreateEnderecoAction;
+use App\Action\Enderecos\DeleteEnderecoAction;
 use App\Action\Enderecos\FindAllEnderecosAction;
 use App\Action\Enderecos\FindEnderecoAction;
 use App\Action\Enderecos\UpdateEnderecoAction;
 use App\Action\Modalidades\CreateModalidadeAction;
+use App\Action\Modalidades\DeleteModalidadeAction;
 use App\Action\Modalidades\FindAllModalidadesAction;
 use App\Action\Modalidades\FindModalidadeAction;
 use App\Action\Modalidades\UpdateModalidadeAction;
 use App\Action\Personagem\CreatePersonagemAction;
+use App\Action\Pessoas\deletePessoaAction;
 use App\Action\Pessoas\FindAllPessoasAction;
 use App\Action\Pessoas\FindPessoaAction;
 use App\Action\Pessoas\CreatePessoaAction;
 use App\Action\Pessoas\UpdatePessoaAction;
-use App\Action\Series\CreateSerieAction;
-use App\Action\Series\FindAllSeriesAction;
-use App\Action\Series\FindSerieAction;
-use App\Action\Series\UpdateSerieAction;
 use App\Action\TipoPessoas\CreateTipoPessoaAction;
+use App\Action\TipoPessoas\DeleteTipoPessoaAction;
 use App\Action\TipoPessoas\FindAllTiposPessoasAction;
 use App\Action\TipoPessoas\FindTipoPessoaAction;
 use App\Action\TipoPessoas\UpdateTipoPessoaAction;
@@ -68,6 +67,7 @@ return function (App $app) {
         $group->get('/{id}', FindPessoaAction::class);
         $group->post('', CreatePessoaAction::class);
         $group->post('/{id}', UpdatePessoaAction::class);
+        $group->delete('/{id}', DeletePessoaAction::class);
     });
 
     $app->group('/enderecos', function (Group $group) {
@@ -75,6 +75,7 @@ return function (App $app) {
         $group->get('/{id}', FindEnderecoAction::class);
         $group->post('', CreateEnderecoAction::class);
         $group->post('/{id}', UpdateEnderecoAction::class);
+        $group->delete('/{id}', DeleteEnderecoAction::class);
     });
 
     $app->group('/academias', function (Group $group) {
@@ -82,6 +83,7 @@ return function (App $app) {
         $group->get('/{id}', FindAcademiaAction::class);
         $group->post('', CreateAcademiaAction::class);
         $group->post('/{id}', UpdateAcademiaAction::class);
+        $group->delete('/{id}', DeleteAcademiaAction::class);
     });
 
     $app->group('/modalidades', function (Group $group) {
@@ -89,6 +91,7 @@ return function (App $app) {
         $group->get('/{id}', FindModalidadeAction::class);
         $group->post('', CreateModalidadeAction::class);
         $group->post('/{id}', UpdateModalidadeAction::class);
+        $group->delete('/{id}', DeleteModalidadeAction::class);
     });
 
     $app->group('/cargas', function (Group $group) {
@@ -96,6 +99,7 @@ return function (App $app) {
         $group->get('/{id}', FindCargaAction::class);
         $group->post('', CreateCargaAction::class);
         $group->post('/{id}', UpdateCargaAction::class);
+        $group->delete('/{id}', DeleteCargaAction::class);
     });
 
     $app->group('/checkins', function (Group $group) {
@@ -103,13 +107,7 @@ return function (App $app) {
         $group->get('/{id}', FindCheckinAction::class);
         $group->post('', CreateCheckinAction::class);
         $group->post('/{id}', UpdateCheckinAction::class);
-    });
-
-    $app->group('/series', function (Group $group) {
-        $group->get('', FindAllSeriesAction::class);
-        $group->get('/{id}', FindSerieAction::class);
-        $group->post('', CreateSerieAction::class);
-        $group->post('/{id}', UpdateSerieAction::class);
+        $group->delete('/{id}', DeleteCheckinAction::class);
     });
 
     $app->group('/tiposPessoas', function (Group $group) {
@@ -117,5 +115,7 @@ return function (App $app) {
         $group->get('/{id}', FindTipoPessoaAction::class);
         $group->post('', CreateTipoPessoaAction::class);
         $group->post('/{id}', UpdateTipoPessoaAction::class);
+        $group->delete('/{id}', DeleteTipoPessoaAction::class);
+
     });
 };

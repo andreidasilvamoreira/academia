@@ -29,4 +29,9 @@ class TipoPessoaService
     {
         $this->tipoPessoaRepository->update($tipoPessoa);
     }
+
+    public function delete($id)
+    {
+        return $this->tipoPessoaRepository->delete($id);
+    }
 }

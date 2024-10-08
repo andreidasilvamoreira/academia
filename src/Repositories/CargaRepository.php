@@ -53,6 +53,16 @@ class CargaRepository extends AbstractRepository
         }
     }
 
+    public function delete(int $id)
+    {
+        $cargaModel = CargaModel::query()->find($id);
+        if (!$cargaModel){
+            throw new \Exception('Carga nao existe na base de dados');
+        }
+
+        return $cargaModel->delete();
+    }
+
     public function dataCreate(Carga $carga)
     {
         return [

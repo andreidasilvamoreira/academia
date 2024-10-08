@@ -54,6 +54,16 @@ class EnderecoRepository extends AbstractRepository
         }
     }
 
+    public function delete(int $id)
+    {
+        $idEndereco = EnderecoModel::query()->find($id);
+        if (!$idEndereco) {
+            throw new \Exception('Endereco nao existe na base de dados');
+        }
+
+        return $idEndereco->delete();
+    }
+
     public function dataCreate(Endereco $endereco)
     {
         return [

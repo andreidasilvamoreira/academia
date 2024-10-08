@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Entities\Checkin;
 use App\Models\CheckinModel;
+use App\Services\CheckinService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CheckinRepository extends AbstractRepository
@@ -52,6 +53,17 @@ class CheckinRepository extends AbstractRepository
         } catch (ModelNotFoundException) {
             return false;
         }
+    }
+
+    public function delete($id)
+    {
+        $checkinModel = CheckinModel::query()->find($id);
+
+        if (!$checkinModel) {
+            throw new \Exception('Checkin nao existe na base de dados');
+        }
+
+        return $checkinModel->delete();
     }
 
     public function dataCreate(Checkin $checkin)

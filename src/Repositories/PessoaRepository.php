@@ -62,8 +62,8 @@ class PessoaRepository extends AbstractRepository
 
     public function delete(int $id)
     {
-        $pessoaModel = PessoaModel::query()->find($id);
 
+        $pessoaModel = PessoaModel::query()->find($id);
         if (!$pessoaModel) {
             throw new \Exception('Pessoa não existe na base de dados');
         }
