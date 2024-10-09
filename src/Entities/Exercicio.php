@@ -9,11 +9,47 @@ class Exercicio extends AbstractEntity
     private ?string $nome;
     private ?string $musculatura_alvo;
     private ?string $dificuldade;
-    private ?string $quantidade_series;
+    private ?int $quantidade_series;
     private ?string $descricao;
     private ?string $concluido;
     private ?string $equipamentos_necessarios;
-    private ?string $material_apoio_id;
+    private ?int $material_apoio_id;
+
+    /**
+     * @return int|null
+     */
+    public function getMaterialApoioId(): ?int
+    {
+        return $this->material_apoio_id;
+    }
+
+    /**
+     * @param int|null $material_apoio_id
+     * @return Exercicio
+     */
+    public function setMaterialApoioId(?int $material_apoio_id): Exercicio
+    {
+        $this->material_apoio_id = $material_apoio_id;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getQuantidadeSeries(): ?int
+    {
+        return $this->quantidade_series;
+    }
+
+    /**
+     * @param int|null $quantidade_series
+     * @return Exercicio
+     */
+    public function setQuantidadeSeries(?int $quantidade_series): Exercicio
+    {
+        $this->quantidade_series = $quantidade_series;
+        return $this;
+    }
 
     public function getNome(): ?string
     {
@@ -48,17 +84,6 @@ class Exercicio extends AbstractEntity
         return $this;
     }
 
-    public function getQuantidadeSeries(): ?string
-    {
-        return $this->quantidade_series;
-    }
-
-    public function setQuantidadeSeries(?string $quantidade_series): Exercicio
-    {
-        $this->quantidade_series = $quantidade_series;
-        return $this;
-    }
-
     public function getDescricao(): ?string
     {
         return $this->descricao;
@@ -89,17 +114,6 @@ class Exercicio extends AbstractEntity
     public function setEquipamentosNecessarios(?string $equipamentos_necessarios): Exercicio
     {
         $this->equipamentos_necessarios = $equipamentos_necessarios;
-        return $this;
-    }
-
-    public function getMaterialApoioId(): ?string
-    {
-        return $this->material_apoio_id;
-    }
-
-    public function setMaterialApoioId(?string $material_apoio_id): Exercicio
-    {
-        $this->material_apoio_id = $material_apoio_id;
         return $this;
     }
 

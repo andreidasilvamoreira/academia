@@ -22,6 +22,11 @@ use App\Action\Enderecos\DeleteEnderecoAction;
 use App\Action\Enderecos\FindAllEnderecosAction;
 use App\Action\Enderecos\FindEnderecoAction;
 use App\Action\Enderecos\UpdateEnderecoAction;
+use App\Action\Exercicios\CreateExercicioAction;
+use App\Action\Exercicios\DeleteExercicioAction;
+use App\Action\Exercicios\FindAllExerciciosAction;
+use App\Action\Exercicios\FindExercicioAction;
+use App\Action\Exercicios\UpdateExercicioAction;
 use App\Action\Modalidades\CreateModalidadeAction;
 use App\Action\Modalidades\DeleteModalidadeAction;
 use App\Action\Modalidades\FindAllModalidadesAction;
@@ -116,6 +121,13 @@ return function (App $app) {
         $group->post('', CreateTipoPessoaAction::class);
         $group->post('/{id}', UpdateTipoPessoaAction::class);
         $group->delete('/{id}', DeleteTipoPessoaAction::class);
+    });
 
+    $app->group('/exercicios', function (Group $group) {
+        $group->get('', FindAllExerciciosAction::class);
+        $group->get('/{id}', FindExercicioAction::class);
+        $group->post('', CreateExercicioAction::class);
+        $group->post('/{id}', UpdateExercicioAction::class);
+        $group->delete('/{id}', DeleteExercicioAction::class);
     });
 };

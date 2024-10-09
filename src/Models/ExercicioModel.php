@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExercicioModel extends Model
 {
+
+    public $timestamps = false;
+
     protected $table = 'Exercicios';
     protected $fillable = [
         'nome',
