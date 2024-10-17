@@ -10,10 +10,64 @@ class FichaTreino extends AbstractEntity
     private ?string $experiencia;
     private ?string $recomendacoes_medicas;
     private ?string $condicoes_medicas;
-    private ?string $treinador_responsavel_id;
+    private ?int $treinador_responsavel_id;
     private ?string $objetivo;
-    private ?string $academia_id;
-    private ?string $tempo_ficha_id;
+    private ?int $academia_id;
+    private ?int $tempo_ficha_id;
+
+    /**
+     * @return int|null
+     */
+    public function getAcademiaId(): ?int
+    {
+        return $this->academia_id;
+    }
+
+    /**
+     * @param int|null $academia_id
+     * @return FichaTreino
+     */
+    public function setAcademiaId(?int $academia_id): FichaTreino
+    {
+        $this->academia_id = $academia_id;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getTempoFichaId(): ?int
+    {
+        return $this->tempo_ficha_id;
+    }
+
+    /**
+     * @param int|null $tempo_ficha_id
+     * @return FichaTreino
+     */
+    public function setTempoFichaId(?int $tempo_ficha_id): FichaTreino
+    {
+        $this->tempo_ficha_id = $tempo_ficha_id;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getTreinadorResponsavelId(): ?int
+    {
+        return $this->treinador_responsavel_id;
+    }
+
+    /**
+     * @param int|null $treinador_responsavel_id
+     * @return FichaTreino
+     */
+    public function setTreinadorResponsavelId(?int $treinador_responsavel_id): FichaTreino
+    {
+        $this->treinador_responsavel_id = $treinador_responsavel_id;
+        return $this;
+    }
 
     public function getObjetivos(): ?string
     {
@@ -59,17 +113,6 @@ class FichaTreino extends AbstractEntity
         return $this;
     }
 
-    public function getTreinadorResponsavelId(): ?string
-    {
-        return $this->treinador_responsavel_id;
-    }
-
-    public function setTreinadorResponsavelId(?string $treinador_responsavel_id): FichaTreino
-    {
-        $this->treinador_responsavel_id = $treinador_responsavel_id;
-        return $this;
-    }
-
     public function getObjetivo(): ?string
     {
         return $this->objetivo;
@@ -78,28 +121,6 @@ class FichaTreino extends AbstractEntity
     public function setObjetivo(?string $objetivo): FichaTreino
     {
         $this->objetivo = $objetivo;
-        return $this;
-    }
-
-    public function getAcademiaId(): ?string
-    {
-        return $this->academia_id;
-    }
-
-    public function setAcademiaId(?string $academia_id): FichaTreino
-    {
-        $this->academia_id = $academia_id;
-        return $this;
-    }
-
-    public function getTempoFichaId(): ?string
-    {
-        return $this->tempo_ficha_id;
-    }
-
-    public function setTempoFichaId(?string $tempo_ficha_id): FichaTreino
-    {
-        $this->tempo_ficha_id = $tempo_ficha_id;
         return $this;
     }
 

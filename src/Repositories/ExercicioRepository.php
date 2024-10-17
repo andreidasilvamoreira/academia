@@ -55,7 +55,6 @@ class ExercicioRepository extends AbstractRepository
         } catch (ModelNotFoundException) {
             return false;
         }
-
     }
 
     public function delete(int $id)

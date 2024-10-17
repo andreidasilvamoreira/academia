@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class FichaTreinoModel extends Model
 {
+
+    public $timestamps = false;
+
     protected $table = 'Fichas_Treino';
     protected $fillable = [
         'objetivos',

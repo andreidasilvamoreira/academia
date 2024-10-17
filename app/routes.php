@@ -27,6 +27,11 @@ use App\Action\Exercicios\DeleteExercicioAction;
 use App\Action\Exercicios\FindAllExerciciosAction;
 use App\Action\Exercicios\FindExercicioAction;
 use App\Action\Exercicios\UpdateExercicioAction;
+use App\Action\FichasTreinos\CreateFichaTreinoAction;
+use App\Action\FichasTreinos\DeleteFichaTreinoAction;
+use App\Action\FichasTreinos\FindAllFichasTreinosAction;
+use App\Action\FichasTreinos\FindFichaTreinoAction;
+use App\Action\FichasTreinos\UpdateFichaTreinoAction;
 use App\Action\Modalidades\CreateModalidadeAction;
 use App\Action\Modalidades\DeleteModalidadeAction;
 use App\Action\Modalidades\FindAllModalidadesAction;
@@ -129,5 +134,13 @@ return function (App $app) {
         $group->post('', CreateExercicioAction::class);
         $group->post('/{id}', UpdateExercicioAction::class);
         $group->delete('/{id}', DeleteExercicioAction::class);
+    });
+
+    $app->group('/fichasTreinos', function (Group $group) {
+        $group->get('', FindAllFichasTreinosAction::class);
+        $group->get('/{id}', FindFichaTreinoAction::class);
+        $group->post('', CreateFichaTreinoAction::class);
+        $group->post('/{id}', UpdateFichaTreinoAction::class);
+        $group->delete('/{id}', DeleteFichaTreinoAction::class);
     });
 };
