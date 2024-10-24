@@ -11,7 +11,7 @@ class Academia extends AbstractEntity
 
 
     private ?string $nome;
-    private ?string $telefone;
+    private ?int $telefone;
     private ?string $horario_funcionamento_abertura;
     private ?string $horario_funcionamento_fechamento;
     private ?int $endereco_id;
@@ -28,26 +28,22 @@ class Academia extends AbstractEntity
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getTelefone(): ?string
+    public function getTelefone(): ?int
     {
         return $this->telefone;
     }
 
     /**
-     * @param string|null $telefone
+     * @param int|null $telefone
      * @return Academia
      */
-    public function setTelefone(?string $telefone): Academia
+    public function setTelefone(?int $telefone): Academia
     {
         $this->telefone = $telefone;
         return $this;
     }
-
-    /**
-     * @return int|null
-     */
 
 
     public function getHorarioFuncionamentoAbertura(): ?string

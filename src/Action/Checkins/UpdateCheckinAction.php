@@ -26,8 +26,8 @@ class UpdateCheckinAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $checkinEntity = Checkin::factory($data)->setId($idCheckin);
-        $checkinCriado = $this->checkinService->update($checkinEntity);
+        $this->checkinService->update($checkinEntity);
 
-        return $this->respondWithData($checkinCriado);
+        return $this->respondWithData(['message' => 'Checkin atualizado com sucesso']);
     }
 }

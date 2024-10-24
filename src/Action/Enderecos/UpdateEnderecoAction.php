@@ -26,8 +26,8 @@ class UpdateEnderecoAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $enderecoEntity = Endereco::factory($data)->setId($idEndereco);
-        $enderecoCriado = $this->enderecoService->update($enderecoEntity);
+        $this->enderecoService->update($enderecoEntity);
 
-        return $this->respondWithData($enderecoCriado);
+        return $this->respondWithData(['message' => 'Endereço atualizado com sucesso']);
     }
 }

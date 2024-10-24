@@ -25,7 +25,7 @@ class UpdateExercicioAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $exercicioEntity = Exercicio::factory($data)->setId($idExercicio);
-        $exercicioCriado = $this->exercicioService->update($exercicioEntity);
+        $this->exercicioService->update($exercicioEntity);
 
-        return $this->respondWithData($exercicioCriado);    }
+        return $this->respondWithData(['message' => 'Exercicio atualizado com sucesso']);    }
 }

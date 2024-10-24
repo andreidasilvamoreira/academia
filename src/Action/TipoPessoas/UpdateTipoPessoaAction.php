@@ -25,8 +25,8 @@ class UpdateTipoPessoaAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $tipoPessoaEntity = TipoPessoa::factory($data)->setId($idTipoPessoa);
-        $tipoPessoa = $this->tipoPessoaService->update($tipoPessoaEntity);
+        $this->tipoPessoaService->update($tipoPessoaEntity);
 
-        return $this->respondWithData($tipoPessoa);
+        return $this->respondWithData(['message' => 'Tipo Pessoa atualizada com sucesso']);
     }
 }

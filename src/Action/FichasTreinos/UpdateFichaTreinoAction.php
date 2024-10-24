@@ -24,8 +24,9 @@ class UpdateFichaTreinoAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $fichaTreinoEntity = FichaTreino::factory($data)->setId($idFichaTreino);
-        $fichaTreinoCriada = $this->fichaTreinoService->update($fichaTreinoEntity);
+        $this->fichaTreinoService->update($fichaTreinoEntity);
 
-        return $this->respondWithData($fichaTreinoCriada);
+
+        return $this->respondWithData(['message' => 'Ficha Treino atualizda com sucesso']);
     }
 }
