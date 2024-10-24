@@ -7,8 +7,6 @@ namespace App\Action\Modalidades;
 
 use App\Action\Action;
 use App\Services\ModalidadeService;
-use Illuminate\Support\Facades\Log;
-use PhpParser\Node\Expr\AssignOp\Mod;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 

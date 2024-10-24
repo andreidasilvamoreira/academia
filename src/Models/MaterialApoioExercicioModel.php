@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaterialApoioExercicioModel extends Model
 {
+
+    public $timestamps = false;
+
     protected $table = 'Materiais_apoio_exercicios';
     protected $fillable = [
         'titulo',

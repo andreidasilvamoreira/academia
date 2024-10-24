@@ -32,6 +32,11 @@ use App\Action\FichasTreinos\DeleteFichaTreinoAction;
 use App\Action\FichasTreinos\FindAllFichasTreinosAction;
 use App\Action\FichasTreinos\FindFichaTreinoAction;
 use App\Action\FichasTreinos\UpdateFichaTreinoAction;
+use App\Action\MateriaisApoioExercicios\CreateMaterialApoioExercicioAction;
+use App\Action\MateriaisApoioExercicios\DeleteMaterialApoioExercicioAction;
+use App\Action\MateriaisApoioExercicios\FindAllMateriaisApoioExerciciosAction;
+use App\Action\MateriaisApoioExercicios\FindMaterialApoioExercicioAction;
+use App\Action\MateriaisApoioExercicios\UpdateMaterialApoioExercicioAction;
 use App\Action\Modalidades\CreateModalidadeAction;
 use App\Action\Modalidades\DeleteModalidadeAction;
 use App\Action\Modalidades\FindAllModalidadesAction;
@@ -142,5 +147,13 @@ return function (App $app) {
         $group->post('', CreateFichaTreinoAction::class);
         $group->post('/{id}', UpdateFichaTreinoAction::class);
         $group->delete('/{id}', DeleteFichaTreinoAction::class);
+    });
+
+    $app->group('/materiaisApoioExercicios', function (Group $group) {
+        $group->get('', FindAllMateriaisApoioExerciciosAction::class);
+        $group->get('/{id}', FindMaterialApoioExercicioAction::class);
+        $group->post('', CreateMaterialApoioExercicioAction::class);
+        $group->post('/{id}', UpdateMaterialApoioExercicioAction::class);
+        $group->delete('/{id}', DeleteMaterialApoioExercicioAction::class);
     });
 };
