@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Entities\Pessoa;
 use App\Models\PessoaModel;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PessoaRepository extends AbstractRepository
 {
@@ -31,7 +32,7 @@ class PessoaRepository extends AbstractRepository
 
     public function create(Pessoa $pessoa): Pessoa
     {
-        $pessoaModel = $this->pessoa->query()->create($this->preparaDadosParaCreate($pessoa));
+        $pessoaModel = $this->pessoa->query()->create($this->dataCreate($pessoa));
 
         return $pessoa->setId(
             $pessoaModel->id
@@ -39,25 +40,19 @@ class PessoaRepository extends AbstractRepository
     }
 
 
-    /**
-     * @param Pessoa $pessoa
-     * @return bool
-     */
     public function update(Pessoa $pessoa): bool
     {
-        $pessoaModel = $this->pessoa->query()->findOrFail($pessoa->getId());
-
-        if ($pessoaModel) {
-            $pessoaUpdate = $this->pessoa->update($this->preparaDadosParaUpdate($pessoa));
-
-            if ($pessoaUpdate) {
-                return true;
-            } else {
-                return false;
+        try {
+            $pessoaModel = PessoaModel::query()->find($pessoa->getId());
+            if (!$pessoaModel) {
+                throw new \Exception('Repetição não existe na base de dados');
             }
-        }
 
-        return false;
+            $pessoaModel->fill($this->dataCreate($pessoa));
+            return $pessoaModel->save();
+        } catch (ModelNotFoundException) {
+
+        }
     }
 
     public function delete(int $id)
@@ -71,7 +66,7 @@ class PessoaRepository extends AbstractRepository
         return $pessoaModel->delete();
     }
 
-    public function preparaDadosParaCreate(Pessoa $pessoa): array
+    public function dataCreate(Pessoa $pessoa): array
     {
         return [
             'endereco_id' => $pessoa->getEnderecoId(),
@@ -86,7 +81,7 @@ class PessoaRepository extends AbstractRepository
         ];
     }
 
-    public function preparaDadosParaUpdate(Pessoa $pessoa): array
+    public function dataUpdate(Pessoa $pessoa): array
     {
         return [
             'endereco_id' => $pessoa->getEnderecoId(),

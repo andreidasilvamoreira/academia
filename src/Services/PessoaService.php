@@ -27,15 +27,7 @@ class PessoaService
 
     public function update(Pessoa $pessoa)
     {
-        try {
-            $this->pessoaRepository->initTransaction();
-
-            $this->pessoaRepository->update($pessoa);
-
-            $this->pessoaRepository->commitTransaction();
-        } catch (\Exception $e) {
-            $this->pessoaRepository->rollBackTransaction();
-        }
+        return $this->pessoaRepository->update($pessoa);
     }
     public function delete($id)
     {
