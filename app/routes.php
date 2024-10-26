@@ -53,6 +53,11 @@ use App\Action\Repeticoes\DeleteRepeticaoAction;
 use App\Action\Repeticoes\FindAllRepeticoesAction;
 use App\Action\Repeticoes\FindRepeticaoAction;
 use App\Action\Repeticoes\UpdateRepeticaoAction;
+use App\Action\Status\CreateStatusAction;
+use App\Action\Status\DeleteStatusAction;
+use App\Action\Status\FindAllStatusAction;
+use App\Action\Status\FindStatusAction;
+use App\Action\Status\UpdateStatusAction;
 use App\Action\TipoPessoas\CreateTipoPessoaAction;
 use App\Action\TipoPessoas\DeleteTipoPessoaAction;
 use App\Action\TipoPessoas\FindAllTiposPessoasAction;
@@ -169,14 +174,14 @@ return function (App $app) {
         $group->post('/{id}', UpdateRepeticaoAction::class);
         $group->delete('/{id}', DeleteRepeticaoAction::class);
     });
-//
-//    $app->group('/status', function (Group $group) {
-//        $group->get('', FindAllStatusAction::class);
-//        $group->get('/{id}', FindStatusAction::class);
-//        $group->post('', CreateStatusAction::class);
-//        $group->post('/{id}', UpdateStatusAction::class);
-//        $group->delete('/{id}', DeleteStatusAction::class);
-//    });
+
+    $app->group('/status', function (Group $group) {
+        $group->get('', FindAllStatusAction::class);
+        $group->get('/{id}', FindStatusAction::class);
+        $group->post('', CreateStatusAction::class);
+        $group->post('/{id}', UpdateStatusAction::class);
+        $group->delete('/{id}', DeleteStatusAction::class);
+    });
 //
 //    $app->group('/tempoFicha', function (Group $group) {
 //        $group->get('', FindAllTempoFichasAction::class);

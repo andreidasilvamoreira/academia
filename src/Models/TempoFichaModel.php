@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TempoFichaModel extends Model
 {
+
+    public $timestamps = false;
+
     protected $table = 'Tempo_Fichas';
     protected $fillable = [
         'data_inicio',
