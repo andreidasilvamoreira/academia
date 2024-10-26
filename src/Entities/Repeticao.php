@@ -6,15 +6,22 @@ namespace App\Entities;
 
 class Repeticao extends AbstractEntity
 {
-    private ?string $quantidade_repeticoes;
+    private ?int $quantidade_repeticoes;
     private ?string $tempo_descanso;
 
-    public function getQuantidadeRepeticoes(): ?string
+    /**
+     * @return int|null
+     */
+    public function getQuantidadeRepeticoes(): ?int
     {
         return $this->quantidade_repeticoes;
     }
 
-    public function setQuantidadeRepeticoes(?string $quantidade_repeticoes): Repeticao
+    /**
+     * @param int|null $quantidade_repeticoes
+     * @return Repeticao
+     */
+    public function setQuantidadeRepeticoes(?int $quantidade_repeticoes): Repeticao
     {
         $this->quantidade_repeticoes = $quantidade_repeticoes;
         return $this;

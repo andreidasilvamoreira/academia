@@ -48,6 +48,11 @@ use App\Action\Pessoas\FindAllPessoasAction;
 use App\Action\Pessoas\FindPessoaAction;
 use App\Action\Pessoas\CreatePessoaAction;
 use App\Action\Pessoas\UpdatePessoaAction;
+use App\Action\Repeticoes\CreateRepeticaoAction;
+use App\Action\Repeticoes\DeleteRepeticaoAction;
+use App\Action\Repeticoes\FindAllRepeticoesAction;
+use App\Action\Repeticoes\FindRepeticaoAction;
+use App\Action\Repeticoes\UpdateRepeticaoAction;
 use App\Action\TipoPessoas\CreateTipoPessoaAction;
 use App\Action\TipoPessoas\DeleteTipoPessoaAction;
 use App\Action\TipoPessoas\FindAllTiposPessoasAction;
@@ -156,4 +161,36 @@ return function (App $app) {
         $group->post('/{id}', UpdateMaterialApoioExercicioAction::class);
         $group->delete('/{id}', DeleteMaterialApoioExercicioAction::class);
     });
+
+    $app->group('/repeticoes', function (Group $group) {
+        $group->get('', FindAllRepeticoesAction::class);
+        $group->get('/{id}', FindRepeticaoAction::class);
+        $group->post('', CreateRepeticaoAction::class);
+        $group->post('/{id}', UpdateRepeticaoAction::class);
+        $group->delete('/{id}', DeleteRepeticaoAction::class);
+    });
+//
+//    $app->group('/status', function (Group $group) {
+//        $group->get('', FindAllStatusAction::class);
+//        $group->get('/{id}', FindStatusAction::class);
+//        $group->post('', CreateStatusAction::class);
+//        $group->post('/{id}', UpdateStatusAction::class);
+//        $group->delete('/{id}', DeleteStatusAction::class);
+//    });
+//
+//    $app->group('/tempoFicha', function (Group $group) {
+//        $group->get('', FindAllTempoFichasAction::class);
+//        $group->get('/{id}', FindTempoFichaAction::class);
+//        $group->post('', CreateTempoFichaAction::class);
+//        $group->post('/{id}', UpdateTempoFichaAction::class);
+//        $group->delete('/{id}', DeleteTempoFichaAction::class);
+//    });
+//
+//    $app->group('/treinosDiarios', function (Group $group) {
+//        $group->get('', FindAllTreinosDiariosAction::class);
+//        $group->get('/{id}', FindTreinoDiarioAction::class);
+//        $group->post('', CreateTreinoDiarioAction::class);
+//        $group->post('/{id}', UpdateTreinoDiarioAction::class);
+//        $group->delete('/{id}', DeleteTreinoDiarioAction::class);
+//    });
 };
