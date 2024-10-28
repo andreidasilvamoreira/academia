@@ -8,8 +8,8 @@ class TempoFicha extends AbstractEntity
 {
     private ?string $data_inicio;
     private ?string $data_fim;
-    private ?string $quantidade_dias;
-    private ?string $pessoa_id;
+    private ?int $quantidade_dias;
+    private ?int $pessoa_id;
 
     public function getDataInicio(): ?string
     {
@@ -33,27 +33,42 @@ class TempoFicha extends AbstractEntity
         return $this;
     }
 
-    public function getQuantidadeDias(): ?string
+    /**
+     * @return int|null
+     */
+    public function getQuantidadeDias(): ?int
     {
         return $this->quantidade_dias;
     }
 
-    public function setQuantidadeDias(?string $quantidade_dias): TempoFicha
+    /**
+     * @param int|null $quantidade_dias
+     * @return TempoFicha
+     */
+    public function setQuantidadeDias(?int $quantidade_dias): TempoFicha
     {
         $this->quantidade_dias = $quantidade_dias;
         return $this;
     }
 
-    public function getPessoaId(): ?string
+    /**
+     * @return int|null
+     */
+    public function getPessoaId(): ?int
     {
         return $this->pessoa_id;
     }
 
-    public function setPessoaId(?string $pessoa_id): TempoFicha
+    /**
+     * @param int|null $pessoa_id
+     * @return TempoFicha
+     */
+    public function setPessoaId(?int $pessoa_id): TempoFicha
     {
         $this->pessoa_id = $pessoa_id;
         return $this;
     }
+
 
     public static function factory($item): self
     {

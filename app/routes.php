@@ -58,6 +58,11 @@ use App\Action\Status\DeleteStatusAction;
 use App\Action\Status\FindAllStatusAction;
 use App\Action\Status\FindStatusAction;
 use App\Action\Status\UpdateStatusAction;
+use App\Action\TempoFichas\CreateTempoFichaAction;
+use App\Action\TempoFichas\DeleteTempoFichaAction;
+use App\Action\TempoFichas\FindAllTempoFichasAction;
+use App\Action\TempoFichas\FindTempoFichaAction;
+use App\Action\TempoFichas\UpdateTempoFichaAction;
 use App\Action\TipoPessoas\CreateTipoPessoaAction;
 use App\Action\TipoPessoas\DeleteTipoPessoaAction;
 use App\Action\TipoPessoas\FindAllTiposPessoasAction;
@@ -182,20 +187,20 @@ return function (App $app) {
         $group->post('/{id}', UpdateStatusAction::class);
         $group->delete('/{id}', DeleteStatusAction::class);
     });
-//
-//    $app->group('/tempoFicha', function (Group $group) {
-//        $group->get('', FindAllTempoFichasAction::class);
-//        $group->get('/{id}', FindTempoFichaAction::class);
-//        $group->post('', CreateTempoFichaAction::class);
-//        $group->post('/{id}', UpdateTempoFichaAction::class);
-//        $group->delete('/{id}', DeleteTempoFichaAction::class);
-//    });
-//
-//    $app->group('/treinosDiarios', function (Group $group) {
-//        $group->get('', FindAllTreinosDiariosAction::class);
-//        $group->get('/{id}', FindTreinoDiarioAction::class);
-//        $group->post('', CreateTreinoDiarioAction::class);
-//        $group->post('/{id}', UpdateTreinoDiarioAction::class);
-//        $group->delete('/{id}', DeleteTreinoDiarioAction::class);
-//    });
+
+    $app->group('/tempoFicha', function (Group $group) {
+        $group->get('', FindAllTempoFichasAction::class);
+        $group->get('/{id}', FindTempoFichaAction::class);
+        $group->post('', CreateTempoFichaAction::class);
+        $group->post('/{id}', UpdateTempoFichaAction::class);
+        $group->delete('/{id}', DeleteTempoFichaAction::class);
+    });
+
+    $app->group('/treinosDiarios', function (Group $group) {
+        $group->get('', FindAllTreinosDiariosAction::class);
+        $group->get('/{id}', FindTreinoDiarioAction::class);
+        $group->post('', CreateTreinoDiarioAction::class);
+        $group->post('/{id}', UpdateTreinoDiarioAction::class);
+        $group->delete('/{id}', DeleteTreinoDiarioAction::class);
+    });
 };

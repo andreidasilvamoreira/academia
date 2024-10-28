@@ -75,6 +75,12 @@ abstract class Action
      */
     protected function respondWithData($data = null, int $statusCode = 200): Response
     {
+
+        if($data === null) {
+
+            $data = ['message' => 'id não encontrado'];
+            $statusCode = 404;
+        }
         $payload = new ActionPayload($statusCode, $data);
 
         return $this->respond($payload);

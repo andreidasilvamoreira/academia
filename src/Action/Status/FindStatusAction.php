@@ -20,5 +20,6 @@ class FindStatusAction extends Action
         $idStatus = $this->request->getAttribute('id');
         $status = $this->statusService->find($idStatus);
 
-        return $this->respondWithData($status);    }
+        return $this->respondWithData($status);
+    }
 }
