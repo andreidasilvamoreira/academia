@@ -47,7 +47,9 @@ class TempoFichaRepository extends AbstractRepository
             }
 
             $tempoFichaModel->fill($this->dataCreate($tempoFicha));
-            return $tempoFichaModel->save();
+            $tempoFichaModel->save();
+
+            return $tempoFichaModel;
         } catch (ModelNotFoundException) {
         }
     }

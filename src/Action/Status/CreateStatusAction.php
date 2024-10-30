@@ -23,5 +23,6 @@ class CreateStatusAction extends Action
         $statusEntity = Status::factory($data);
         $statusCriada = $this->statusService->create($statusEntity);
 
-        return $this->respondWithData($statusCriada);    }
+        return $this->respondWithData($statusCriada);
+    }
 }

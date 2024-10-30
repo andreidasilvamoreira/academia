@@ -8,8 +8,8 @@ class TreinoDiario extends AbstractEntity
 {
     private ?string $nome;
     private ?string $slug;
-    private ?string $ficha_treino_id;
-    private ?string $checkin_id;
+    private ?int $ficha_treino_id;
+    private ?int $checkin_id;
 
     public function getNome(): ?string
     {
@@ -33,23 +33,37 @@ class TreinoDiario extends AbstractEntity
         return $this;
     }
 
-    public function getFichaTreinoId(): ?string
+    /**
+     * @return int|null
+     */
+    public function getFichaTreinoId(): ?int
     {
         return $this->ficha_treino_id;
     }
 
-    public function setFichaTreinoId(?string $ficha_treino_id): TreinoDiario
+    /**
+     * @param int|null $ficha_treino_id
+     * @return TreinoDiario
+     */
+    public function setFichaTreinoId(?int $ficha_treino_id): TreinoDiario
     {
         $this->ficha_treino_id = $ficha_treino_id;
         return $this;
     }
 
-    public function getCheckinId(): ?string
+    /**
+     * @return int|null
+     */
+    public function getCheckinId(): ?int
     {
         return $this->checkin_id;
     }
 
-    public function setCheckinId(?string $checkin_id): TreinoDiario
+    /**
+     * @param int|null $checkin_id
+     * @return TreinoDiario
+     */
+    public function setCheckinId(?int $checkin_id): TreinoDiario
     {
         $this->checkin_id = $checkin_id;
         return $this;

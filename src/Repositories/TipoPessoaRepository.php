@@ -13,7 +13,7 @@ class TipoPessoaRepository extends AbstractRepository
 
     protected function getTableName(): string
     {
-        return $this->getTableName();
+        return $this->tipoPessoa->getTable();
     }
 
     public function findAll()
@@ -41,19 +41,19 @@ class TipoPessoaRepository extends AbstractRepository
 
     public function update(TipoPessoa $tipoPessoa): bool
     {
-        $tipoPessoaModel = $this->tipoPessoa->query()->findOrFail($tipoPessoa->getId());
-
-        if ($tipoPessoaModel) {
-            $tipoPessoaUpdate = $this->tipoPessoa->update($this->dataUpdate($tipoPessoa));
-
-            if ($tipoPessoaUpdate) {
-                return true;
-            } else {
-                return false;
+        try {
+            $tipoPessoaModel = TipoPessoaModel::query()->find($tipoPessoa->getId());
+            if (!$tipoPessoaModel) {
+                throw new \Exception('Tipo Pessoa não existe na base de dados');
             }
-        }
 
-        return false;
+            $tipoPessoaModel->fill($this->dataCreate($tipoPessoa));
+            $tipoPessoaModel->save();
+
+            return $tipoPessoaModel;
+        } catch (ModelNotFoundException) {
+
+        }
     }
 
     public function delete($id)
