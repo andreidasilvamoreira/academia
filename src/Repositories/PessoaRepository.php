@@ -40,7 +40,7 @@ class PessoaRepository extends AbstractRepository
     }
 
 
-    public function update(Pessoa $pessoa): bool
+    public function update(Pessoa $pessoa)
     {
         try {
             $pessoaModel = PessoaModel::query()->find($pessoa->getId());
@@ -49,7 +49,9 @@ class PessoaRepository extends AbstractRepository
             }
 
             $pessoaModel->fill($this->dataCreate($pessoa));
-            return $pessoaModel->save();
+            $pessoaModel->save();
+
+            return $pessoaModel;
         } catch (ModelNotFoundException) {
 
         }

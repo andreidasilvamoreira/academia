@@ -24,9 +24,9 @@ class UpdateMaterialApoioExercicioAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $materialApoioExercicioEntity = MaterialApoioExercicio::factory($data)->setId($idMaterialApoioExercicio);
-        $this->materialApoioExercicioService->update($materialApoioExercicioEntity);
+        $materialApoioExercicio = $this->materialApoioExercicioService->update($materialApoioExercicioEntity);
 
 
-        return $this->respondWithData(['message' => 'Material de Apoio atualizda com sucesso']);
+        return $this->respondWithData($materialApoioExercicio);
     }
 }

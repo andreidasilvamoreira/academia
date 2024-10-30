@@ -50,6 +50,7 @@ class FichaPessoaRepository extends AbstractRepository
             $fichaTreinoModel->fill($this->dataUpdate($fichaTreino));
             $fichaTreinoModel->save();
 
+            return $fichaTreinoModel;
         } catch (ModelNotFoundException) {
             return false;
         }

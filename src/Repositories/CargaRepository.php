@@ -38,7 +38,7 @@ class CargaRepository extends AbstractRepository
         return $carga->setId($cargaModel->getKey());
     }
 
-    public function update(Carga $carga): bool
+    public function update(Carga $carga)
     {
         try {
             $cargaModel = CargaModel::query()->find($carga->getId());
@@ -47,7 +47,9 @@ class CargaRepository extends AbstractRepository
             }
 
             $cargaModel->fill($this->dataUpdate($carga));
-            return $cargaModel->save();
+            $cargaModel->save();
+
+            return $cargaModel;
         } catch (ModelNotFoundException) {
             return false;
         }

@@ -48,7 +48,9 @@ class RepeticaoRepository extends AbstractRepository
             }
 
             $repeticaoModel->fill($this->dataCreate($repeticao));
-            return $repeticaoModel->save();
+            $repeticaoModel->save();
+
+            return $repeticaoModel;
         } catch (ModelNotFoundException) {
 
         }

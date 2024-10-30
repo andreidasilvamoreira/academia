@@ -24,8 +24,8 @@ class UpdateTempoFichaAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $tempoFichaEntity = TempoFicha::factory($data)->setId($idTempoFicha);
-        $this->tempoFichaService->update($tempoFichaEntity);
+        $tempoFicha = $this->tempoFichaService->update($tempoFichaEntity);
 
-        return $this->respondWithData(['message' => 'Tempo Ficha atualizada com sucesso']);
+        return $this->respondWithData($tempoFicha);
     }
 }

@@ -18,11 +18,12 @@ class UpdateStatusAction extends Action
     }
     protected function action():Response
     {
-        $idStatus = (int) $this->request->getAttribute('id');
+        $idStatus = (int)$this->request->getAttribute('id');
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $statusEntity = Status::factory($data)->setId($idStatus);
-        $this->statusService->update($statusEntity);
+        $status = $this->statusService->update($statusEntity);
 
-        return $this->respondWithData(['message' => 'Status atualizada com sucesso']);    }
+        return $this->respondWithData($status);
+    }
 }

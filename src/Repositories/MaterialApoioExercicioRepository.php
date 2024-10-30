@@ -50,6 +50,7 @@ class MaterialApoioExercicioRepository extends AbstractRepository
             $materialApoioExercicioModel->fill($this->dataUpdate($materialApoioExercicio));
             $materialApoioExercicioModel->save();
 
+            return $materialApoioExercicioModel;
         } catch (ModelNotFoundException) {
             return false;
         }

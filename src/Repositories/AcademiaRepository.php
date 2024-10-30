@@ -64,7 +64,7 @@ class AcademiaRepository extends AbstractRepository
         return $academia->setId($academiaModel->getKey());
     }
 
-    public function update(Academia $academia): bool
+    public function update(Academia $academia)
     {
         try {
             $academiaModel = AcademiaModel::query()->find($academia->getId());
@@ -74,8 +74,9 @@ class AcademiaRepository extends AbstractRepository
             }
 
             $academiaModel->fill($this->dataUpdate($academia));
+            $academiaModel->save();
 
-            return $academiaModel->save();
+            return $academiaModel;
         } catch (ModelNotFoundException $exception) {
             return false;
         }

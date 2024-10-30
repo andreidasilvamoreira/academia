@@ -48,7 +48,9 @@ class Statusrepository extends AbstractRepository
             }
 
             $statusModel->fill($this->dataCreate($status));
-            return $statusModel->save();
+            $statusModel->save();
+
+            return $statusModel;
             } catch (ModelNotFoundException) {
         }
     }

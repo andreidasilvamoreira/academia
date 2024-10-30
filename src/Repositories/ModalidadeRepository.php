@@ -45,7 +45,7 @@ class ModalidadeRepository extends AbstractRepository
         return $modalidade->setId($modalidadeModel->getKey());
     }
 
-    public function update(Modalidade $modalidade): bool
+    public function update(Modalidade $modalidade)
     {
         try {
             $modalidadeModel = ModalidadeModel::query()->find($modalidade->getId());
@@ -54,7 +54,9 @@ class ModalidadeRepository extends AbstractRepository
             }
 
             $modalidadeModel->fill($this->dataUpdate($modalidade));
-            return $modalidadeModel->save();
+            $modalidadeModel->save();
+
+            return $modalidadeModel;
         } catch (ModelNotFoundException) {
             return false;
         }

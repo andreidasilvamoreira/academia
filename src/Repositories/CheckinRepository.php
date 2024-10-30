@@ -40,7 +40,7 @@ class CheckinRepository extends AbstractRepository
         return $checkin->setId($checkinModel->getKey());
     }
 
-    public function update(Checkin $checkin): bool
+    public function update(Checkin $checkin)
     {
         try {
             $checkinModel = CheckinModel::query()->find($checkin->getId());
@@ -49,7 +49,9 @@ class CheckinRepository extends AbstractRepository
                 throw new \Exception('Checkin não existe na base de dados');
             }
             $checkinModel->fill($this->dataUpdate($checkin));
-            return $checkinModel->save();
+            $checkinModel->save();
+
+            return $checkinModel;
         } catch (ModelNotFoundException) {
             return false;
         }

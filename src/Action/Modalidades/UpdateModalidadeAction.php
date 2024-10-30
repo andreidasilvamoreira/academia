@@ -27,7 +27,8 @@ class UpdateModalidadeAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $modalidadeEntity = Modalidade::factory($data)->setId($idModalidade);
-        $this->modalidadeService->update($modalidadeEntity);
-        return $this->respondWithData(['message' => 'Modalidade atualizada com sucesso']);
+        $modalidade = $this->modalidadeService->update($modalidadeEntity);
+
+        return $this->respondWithData($modalidade);
     }
 }

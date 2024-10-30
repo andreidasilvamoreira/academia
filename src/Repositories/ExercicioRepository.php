@@ -51,7 +51,9 @@ class ExercicioRepository extends AbstractRepository
             }
 
             $exercicioModel->fill($this->dataUpdate($exercicio));
-            return $exercicioModel->save();
+            $exercicioModel->save();
+
+            return $exercicioModel;
         } catch (ModelNotFoundException) {
             return false;
         }

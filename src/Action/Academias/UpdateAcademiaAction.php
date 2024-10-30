@@ -25,8 +25,8 @@ class UpdateAcademiaAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $academiaEntity = Academia::factory($data)->setId($idAcademia);
-        $this->academiaService->update($academiaEntity);
+        $academia = $this->academiaService->update($academiaEntity);
 
-        return $this->respondWithData(['message' => 'Academia atualizada com sucesso']);
+        return $this->respondWithData($academia);
     }
 }

@@ -24,8 +24,8 @@ class UpdateRepeticaoAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $repeticaoEntity = Repeticao::factory($data)->setId($idRepeticao);
-        $this->repeticaoService->update($repeticaoEntity);
+        $repeticao = $this->repeticaoService->update($repeticaoEntity);
 
-        return $this->respondWithData(['message' => 'Repetição atualizada com sucesso']);
+        return $this->respondWithData($repeticao);
     }
 }

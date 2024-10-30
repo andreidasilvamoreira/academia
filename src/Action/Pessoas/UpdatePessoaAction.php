@@ -25,8 +25,8 @@ class UpdatePessoaAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $pessoaEntity = Pessoa::factory($data)->setId($idPessoa);
-        $this->pessoaService->update($pessoaEntity);
+        $pessoa = $this->pessoaService->update($pessoaEntity);
 
-        return $this->respondWithData(['message' => 'Pessoa atualizada com sucesso']);
+        return $this->respondWithData($pessoa);
     }
 }

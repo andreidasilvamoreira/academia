@@ -38,7 +38,7 @@ class EnderecoRepository extends AbstractRepository
         return $endereco->setId($enderecoModel->getKey());
     }
 
-    public function update(Endereco $endereco): bool
+    public function update(Endereco $endereco)
     {
         try {
             $enderecoModel = EnderecoModel::query()->find($endereco->getId());
@@ -48,7 +48,9 @@ class EnderecoRepository extends AbstractRepository
             }
 
             $enderecoModel->fill($this->dataUpdate($endereco));
-            return $enderecoModel->save();
+            $enderecoModel->save();
+
+            return $enderecoModel;
         } catch (ModelNotFoundException) {
             return false;
         }

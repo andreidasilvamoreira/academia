@@ -25,8 +25,8 @@ class UpdateCargaAction extends Action
         $data = $this->request->getParsedBody();
         $data = $this->inferDataTypes($data);
         $cargaEntity = Carga::factory($data)->setId($idCarga);
-        $this->cargaService->update($cargaEntity);
+        $carga = $this->cargaService->update($cargaEntity);
 
-        return $this->respondWithData(['message' => 'Carga atualizada com sucesso']);
+        return $this->respondWithData($carga);
     }
 }
