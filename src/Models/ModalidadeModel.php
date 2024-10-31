@@ -21,4 +21,9 @@ class ModalidadeModel extends Model
     {
         return $this->hasMany(AcademiaModalidadeModel::class, 'modalidade_id');
     }
+
+    public function exercicioModalidade()
+    {
+        return $this->hasMany(ExercicioModalidadeModel::class, 'modalidade_id');
+    }
 }

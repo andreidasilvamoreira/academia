@@ -23,4 +23,19 @@ class AcademiaModel extends Model
     {
         return $this->hasMany(AcademiaModalidadeModel::class, 'academia_id');
     }
+
+    public function pessoasAcademia()
+    {
+        return $this->hasMany(PessoaAcademiaModel::class, 'academia_id');
+    }
+
+    public function fichasTreino()
+    {
+        return $this->hasMany(FichaTreinoModel::class, 'academia_id');
+    }
+
+    public function enderecos()
+    {
+        return $this->belongsTo(EnderecoModel::class, 'endereco_id');
+    }
 }

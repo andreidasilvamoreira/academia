@@ -17,4 +17,19 @@ class CheckinModel extends Model
         'pessoa_id',
         'status_id',
     ];
+
+    public function status()
+    {
+        return $this->hasMany(StatusModel::class, 'checkin_id');
+    }
+
+    public function treinoDiario()
+    {
+        return $this->hasMany(TreinoDiarioModel::class, 'checkin_id');
+    }
+
+    public function pessoas()
+    {
+        return $this->belongsTo(PessoaModel::class, 'pessoa_id');
+    }
 }

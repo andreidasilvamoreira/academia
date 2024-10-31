@@ -11,4 +11,14 @@ class TreinoDiarioExercicioModel extends Model
         'treino_diario_id',
         'exercicio_id',
     ];
+
+    public function exercicio()
+    {
+        return $this->belongsTo(ExercicioModel::class, 'exercicio_id');
+    }
+
+    public function tipoPessoa()
+    {
+        return $this->belongsTo(TipoPessoaModel::class, 'tipo_pessoa_id');
+    }
 }

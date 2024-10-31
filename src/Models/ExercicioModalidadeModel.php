@@ -11,4 +11,14 @@ class ExercicioModalidadeModel extends Model
         'exercicio_id',
         'modalidade_id',
     ];
+
+    public function modalidade()
+    {
+        return $this->belongsTo(ModalidadeModel::class, 'modalidade_id');
+    }
+
+    public function exercicio()
+    {
+        return $this->belongsTo(ExercicioModel::class, 'exercicio_id');
+    }
 }

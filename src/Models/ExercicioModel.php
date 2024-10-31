@@ -20,4 +20,24 @@ class ExercicioModel extends Model
         'equipamentos_necessarios',
         'material_apoio_id',
     ];
+
+    public function exercicioModalidade()
+    {
+        return $this->hasMany(ExercicioModalidadeModel::class, 'exercicio_id');
+    }
+
+    public function treinoDiarioExercicio()
+    {
+        return $this->hasMany(TreinoDiarioExercicioModel::class, 'exercicio_id');
+    }
+
+    public function materiaisApoioExercicio()
+    {
+        return $this->hasMany(MaterialApoioExercicioModel::class, 'exercicio_id');
+    }
+
+    public function serie()
+    {
+        return $this->hasMany(SerieModel::class, 'exercicio_id');
+    }
 }

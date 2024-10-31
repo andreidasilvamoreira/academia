@@ -13,4 +13,9 @@ class StatusModel extends Model
         'nome',
         'slug',
     ];
+
+    public function checkin()
+    {
+        return $this->hasMany(CheckinModel::class, 'status_id');
+    }
 }

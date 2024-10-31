@@ -13,4 +13,9 @@ class CargaModel extends Model
     protected $fillable = [
         'numero_cargas',
     ];
+
+    public function serie()
+    {
+        return $this->hasMany(SerieModel::class, 'carga_id');
+    }
 }

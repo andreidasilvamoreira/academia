@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class SerieModel extends Model
 {
+
+    public $timestamps = null;
+
     protected $table = 'Series';
     protected $fillable = [
         'repeticoes_id',
@@ -13,5 +16,18 @@ class SerieModel extends Model
         'carga_id',
     ];
 
-    public $timestamps = null;
+    public function exercicio()
+    {
+        return $this->hasMany(ExercicioModel::class, 'serie_id');
+    }
+
+    public function carga()
+    {
+        return $this->hasMany(CargaModel::class, 'serie_id');
+    }
+
+    public function repeticao()
+    {
+        return $this->hasMany(RepeticaoModel::class, 'serie_id');
+    }
 }

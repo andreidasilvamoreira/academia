@@ -26,7 +26,7 @@ class AcademiaService
         return $this->academiaRepository->create($academia);
     }
 
-    public function update(Academia $academia): bool
+    public function update(Academia $academia)
     {
         return $this->academiaRepository->update($academia);
     }

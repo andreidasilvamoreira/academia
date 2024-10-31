@@ -11,4 +11,14 @@ class PessoaAcademiaModel extends Model
         'academia_id',
         'pessoa_id',
     ];
+
+    public function pessoa()
+    {
+        return $this->belongsTo(PessoaModel::class, 'pessoa_id');
+    }
+
+    public function academia()
+    {
+        return $this->belongsTo(AcademiaModel::class, 'academia_id');
+    }
 }

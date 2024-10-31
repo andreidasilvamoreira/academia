@@ -15,4 +15,9 @@ class MaterialApoioExercicioModel extends Model
         'tipo',
         'url',
     ];
+
+    public function exercicio()
+    {
+        return $this->hasMany(ExercicioModel::class, 'material_apoio_exercicio_id');
+    }
 }

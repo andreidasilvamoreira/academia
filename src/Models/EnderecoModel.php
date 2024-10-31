@@ -17,4 +17,14 @@ class EnderecoModel extends Model
         'cidade',
         'complemento',
     ];
+
+    public function pessoa()
+    {
+        return $this->hasMany(PessoaModel::class, 'endereco_id');
+    }
+
+    public function academia()
+    {
+        return $this->hasMany(AcademiaModel::class, 'endereco_id');
+    }
 }

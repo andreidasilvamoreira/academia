@@ -11,4 +11,14 @@ class PessoaTipoPessoaModel extends Model
         'pessoa_id',
         'tipo_pessoa_id',
     ];
+
+    public function pessoa()
+    {
+        return $this->belongsTo(PessoaModel::class, 'pessoa_id');
+    }
+
+    public function tipoPessoa()
+    {
+        return $this->belongsTo(TipoPessoaModel::class, 'tipo_pessoa_id');
+    }
 }

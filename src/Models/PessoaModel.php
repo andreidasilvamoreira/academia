@@ -22,4 +22,29 @@ class PessoaModel extends Model
         'created_at' ,
         'updated_at ',
     ];
+
+    public function endereco()
+    {
+        return $this->belongsTo(EnderecoModel::class, 'endereco_id');
+    }
+
+    public function pessoaAcademia()
+    {
+        return $this->hasMany(PessoaAcademiaModel::class, 'pessoa_id');
+    }
+
+    public function tempoFicha()
+    {
+        return $this->hasMany(TempoFichaModel::class, 'pessoa_id');
+    }
+
+    public function pessoaTipoPessoa()
+    {
+        return $this->hasMany(PessoaTipoPessoaModel::class, 'pessoa_id');
+    }
+
+    public function checkin()
+    {
+        return $this->hasMany(CheckinModel::class, 'pessoa_id');
+    }
 }

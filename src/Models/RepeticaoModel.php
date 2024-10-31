@@ -13,4 +13,9 @@ class RepeticaoModel extends Model
         'quantidade_repeticoes',
         'tempo_descanso',
     ];
+
+    public function serie()
+    {
+        return $this->hasMany(SerieModel::class, 'repeticao_id');
+    }
 }

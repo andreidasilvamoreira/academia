@@ -16,4 +16,19 @@ class TreinoDiarioModel extends Model
         'ficha_treino_id',
         'checkin_id',
     ];
+
+    public function treinoDiarioExercicio()
+    {
+        return $this->hasMany(TreinoDiarioExercicioModel::class, 'treino_diario_id');
+    }
+
+    public function fichaTreino()
+    {
+        return $this->hasMany(FichaTreinoModel::class, 'treino_diario_id');
+    }
+
+    public function checkin()
+    {
+        return $this->hasMany(CheckinModel::class, 'treino_diario_id');
+    }
 }

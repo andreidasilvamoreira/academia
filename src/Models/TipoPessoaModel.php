@@ -15,4 +15,9 @@ class TipoPessoaModel extends Model
         'nome',
         'slug',
     ];
+
+    public function tipoPessoa()
+    {
+        return $this->hasMany(TipoPessoaModel::class, 'tipo_pessoa_id');
+    }
 }
