@@ -40,7 +40,8 @@ use App\Action\MateriaisApoioExercicios\UpdateMaterialApoioExercicioAction;
 use App\Action\Modalidades\CreateModalidadeAction;
 use App\Action\Modalidades\DeleteModalidadeAction;
 use App\Action\Modalidades\FindAllModalidadesAction;
-use App\Action\Modalidades\FindModalidadeAction;
+use App\Action\Modalidades\FindModalidadeExercicioAction;
+use App\Action\Modalidades\FindModalidadeAcademiaAction;
 use App\Action\Modalidades\UpdateModalidadeAction;
 use App\Action\Personagem\CreatePersonagemAction;
 use App\Action\Pessoas\deletePessoaAction;
@@ -123,7 +124,8 @@ return function (App $app) {
 
     $app->group('/modalidades', function (Group $group) {
         $group->get('', FindAllModalidadesAction::class);
-        $group->get('/{id}', FindModalidadeAction::class);
+        $group->get('/{id}/academia', FindModalidadeAcademiaAction::class);
+        $group->get('/{id}/exercicio', FindModalidadeExercicioAction::class);
         $group->post('', CreateModalidadeAction::class);
         $group->post('/{id}', UpdateModalidadeAction::class);
         $group->delete('/{id}', DeleteModalidadeAction::class);

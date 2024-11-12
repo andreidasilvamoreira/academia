@@ -16,9 +16,9 @@ class ExercicioService
         return $this->exercicioRepository->findAll();
     }
 
-    public function find($id)
+    public function findWithModalidade($id)
     {
-        return $this->exercicioRepository->find($id);
+        return $this->exercicioRepository->findWithModalidade($id);
     }
 
     public function create(Exercicio $exercicio)

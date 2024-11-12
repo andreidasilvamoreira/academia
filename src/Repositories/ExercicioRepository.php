@@ -26,11 +26,18 @@ class ExercicioRepository extends AbstractRepository
         )->toArray();
     }
 
-    public function find($id)
+    public function findWithModalidade($id)
     {
-        $exercicioModel = ExercicioModel::query()->find($id);
+        $exercicio = $this->exercicioModel
+            ->with(['modalidades'])
+            ->find($id);
+        if ($exercicio) {
+            foreach ($exercicio->modalidades as $modalidade) {
+                $modalidade->makeHidden(['exercicio_id', 'modalidade_id']);
+            }
+        }
 
-        return $exercicioModel ? Exercicio::factory($exercicioModel->toArray()): null;
+        return $exercicio;
     }
 
     public function create(Exercicio $exercicio)

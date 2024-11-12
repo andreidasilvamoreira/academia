@@ -11,7 +11,7 @@ use PhpParser\Node\Expr\AssignOp\Mod;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
-class FindModalidadeAction extends Action
+class FindModalidadeExercicioAction extends Action
 {
     public function __construct(
         protected LoggerInterface $logger,
@@ -23,8 +23,8 @@ class FindModalidadeAction extends Action
     protected function action(): Response
     {
         $idModalidade = $this->request->getAttribute('id');
-        $modalidade = $this->modalidadeService->find($idModalidade);
+        $modalidadeComExercicio = $this->modalidadeService->findWithExercicio($idModalidade);
 
-        return $this->respondWithData($modalidade);
+        return $this->respondWithData($modalidadeComExercicio);
     }
 }

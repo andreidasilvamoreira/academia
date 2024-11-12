@@ -22,15 +22,30 @@ class ModalidadeRepository extends AbstractRepository
             fn(ModalidadeModel $modalidade) => Modalidade::factory($modalidade->toArray())
         )->toArray();
     }
-    public function find($id): ?ModalidadeModel
+    public function findWithAcademia($id): ?ModalidadeModel
     {
         $modalidade = $this->modalidade
-            ->with(['academias.academia'])
+            ->with('academias')
             ->find($id);
 
         if ($modalidade) {
-            foreach ($modalidade->academias as $academia){
+            foreach ($modalidade->academias as $academia) {
                 $academia->makeHidden(['academia_id', 'modalidade_id']);
+            }
+        }
+
+        return $modalidade;
+    }
+
+    public function findWithExercicio($id): ?ModalidadeModel
+    {
+        $modalidade = $this->modalidade
+            ->with(['exercicios'])
+            ->find($id);
+
+        if ($modalidade) {
+            foreach ($modalidade->exercicios as $exercicio) {
+                $exercicio->makeHidden(['exercicio_id', 'modalidade_id']);
             }
         }
 

@@ -19,11 +19,11 @@ class ModalidadeModel extends Model
 
     public function academias()
     {
-        return $this->hasMany(AcademiaModalidadeModel::class, 'modalidade_id');
+        return $this->belongsToMany(AcademiaModel::class, 'academias_modalidades','modalidade_id', 'academia_id');
     }
 
-    public function exercicioModalidade()
+    public function exercicios()
     {
-        return $this->hasMany(ExercicioModalidadeModel::class, 'modalidade_id');
+        return $this->belongsToMany(ExercicioModel::class, 'exercicio_modalidade', 'modalidade_id', 'exercicio_id');
     }
 }

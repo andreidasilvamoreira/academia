@@ -45,8 +45,10 @@ class AcademiaRepository extends AbstractRepository
     public function find($id): ?AcademiaModel
     {
         $academia = $this->academia
-            ->with(['modalidades.modalidade'])
+
+            ->with(['modalidades'])
             ->find($id);
+
         if ($academia) {
             foreach ($academia->modalidades as $modalidade) {
                     $modalidade->makeHidden(['academia_id', 'modalidade_id']);

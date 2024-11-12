@@ -14,10 +14,16 @@ class ModalidadeService
     {
         return $this->modalidadeRepository->findAll();
     }
-    public function find($id)
+    public function findWithAcademia($id)
     {
-        return $this->modalidadeRepository->find($id);
+        return $this->modalidadeRepository->findWithAcademia($id);
     }
+
+    public function findWithExercicio($id)
+    {
+        return $this->modalidadeRepository->findWithExercicio($id);
+    }
+
     public function create(Modalidade $modalidade)
     {
         return $this->modalidadeRepository->create($modalidade);

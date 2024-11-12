@@ -21,7 +21,7 @@ class AcademiaModel extends Model
 
     public function modalidades()
     {
-        return $this->hasMany(AcademiaModalidadeModel::class, 'academia_id');
+        return $this->belongsToMany(ModalidadeModel::class, 'academias_modalidades', 'academia_id', 'modalidade_id');
     }
 
     public function pessoasAcademia()

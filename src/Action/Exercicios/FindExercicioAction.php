@@ -21,7 +21,7 @@ class FindExercicioAction extends Action
     protected function action(): Response
     {
         $idExercicio = $this->request->getAttribute('id');
-        $exercicio = $this->exercicioService->find($idExercicio);
+        $exercicio = $this->exercicioService->findWithModalidade($idExercicio);
 
         return $this->respondWithData($exercicio);
     }
