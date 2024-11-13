@@ -8,7 +8,7 @@ use App\Services\TreinoDiarioService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
-class FindTreinoDiarioAction extends Action
+class FindTreinoDiarioExercicioAction extends Action
 {
     public function __construct(
         protected LoggerInterface   $logger,
@@ -21,7 +21,7 @@ class FindTreinoDiarioAction extends Action
     protected function action(): Response
     {
         $idTreinoDiario = $this->request->getAttribute('id');
-        $treinoDiario = $this->treinoDiarioService->find($idTreinoDiario);
+        $treinoDiario = $this->treinoDiarioService->findWithExercicio($idTreinoDiario);
 
         return $this->respondWithData($treinoDiario);
     }

@@ -9,7 +9,7 @@ use App\Services\ExercicioService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
-class FindExercicioAction extends Action
+class FindExercicioModalidadeAction extends Action
 {
     public function __construct(
       protected LoggerInterface $logger,

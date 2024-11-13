@@ -21,6 +21,11 @@ class ExercicioService
         return $this->exercicioRepository->findWithModalidade($id);
     }
 
+    public function findWithTreinoDiario($id)
+    {
+        return $this->exercicioRepository->findWithTreinoDiario($id);
+    }
+
     public function create(Exercicio $exercicio)
     {
         return $this->exercicioRepository->create($exercicio);

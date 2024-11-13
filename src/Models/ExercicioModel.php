@@ -21,14 +21,14 @@ class ExercicioModel extends Model
         'material_apoio_id',
     ];
 
-    public function Modalidades()
+    public function modalidades()
     {
         return $this->belongsToMany(ModalidadeModel::class, 'exercicio_modalidade','exercicio_id', 'modalidade_id');
     }
 
-    public function treinoDiarioExercicio()
+    public function treinoDiario()
     {
-        return $this->hasMany(TreinoDiarioExercicioModel::class, 'exercicio_id');
+        return $this->belongsToMany(TreinoDiarioModel::class, 'Treinos_Diario_Exercicios','exercicio_id','treino_diario_id');
     }
 
     public function materiaisApoioExercicio()

@@ -25,9 +25,16 @@ class TipoPessoaRepository extends AbstractRepository
 
     public function find($id)
     {
-        $tipoPessoa = $this->tipoPessoa->query()->find($id);
+        $tipoPessoa = $this->tipoPessoa
+            ->with(['pessoas'])
+            ->find($id);
 
-        return $tipoPessoa ? TipoPessoa::factory($tipoPessoa->toArray()) : null;
+        if ($tipoPessoa) {
+            foreach ($tipoPessoa->pessoas as $pessoa) {
+                $pessoa->MakeHidden(['pessoa_id', 'tipo_pessoa_id']);
+            }
+        }
+        return $tipoPessoa;
     }
 
     public function create(TipoPessoa $tipoPessoa)

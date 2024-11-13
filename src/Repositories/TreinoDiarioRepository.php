@@ -23,11 +23,19 @@ class TreinoDiarioRepository extends AbstractRepository
         )->toArray();
     }
 
-    public function find($id)
+    public function findWithExercicio($id)
     {
-        $idTreinoDiario = $this->treinoDiarioModel->query()->find($id);
+        $treinoDiario = $this->treinoDiarioModel
+            ->with(['exercicio'])
+            ->find($id);
 
-        return $idTreinoDiario ? TreinoDiario::factory($idTreinoDiario->toArray()): null;
+        if ($treinoDiario) {
+            foreach ($treinoDiario->exercicio as $exercicio) {
+                $exercicio->Makehidden(['exercicio_id', 'treino_diario_id']);
+            }
+        }
+
+        return $treinoDiario;
     }
 
     public function create(TreinoDiario $treinoDiario)

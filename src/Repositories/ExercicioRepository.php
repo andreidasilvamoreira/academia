@@ -40,6 +40,21 @@ class ExercicioRepository extends AbstractRepository
         return $exercicio;
     }
 
+    public function findWithTreinoDiario($id)
+    {
+        $exercicio = $this->exercicioModel
+            ->with(['treinoDiario'])
+            ->find($id);
+
+        if ($exercicio) {
+            foreach ($exercicio->treinoDiario as $treinoDiario) {
+                $treinoDiario->makeHidden(['exercicio_id', 'treino_diario_id']);
+            }
+        }
+
+        return $exercicio;
+    }
+
     public function create(Exercicio $exercicio)
     {
         $exercicioModel = new ExercicioModel($this->dataCreate($exercicio));

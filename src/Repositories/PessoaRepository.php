@@ -23,11 +23,19 @@ class PessoaRepository extends AbstractRepository
             fn(PessoaModel $pessoa) => Pessoa::factory($pessoa->toArray())
         )->toArray();
     }
-    public function find($id): ?Pessoa
+    public function findWithTipoPessoa($id)
     {
-        $pessoa = $this->pessoa->query()->find($id);
+        $pessoa = $this->pessoa
+            ->with(['tipoPessoa'])
+            ->find($id);
 
-        return $pessoa ? Pessoa::factory($pessoa->toArray()) : null;
+        if ($pessoa) {
+            foreach ($pessoa->tipoPessoa as $tipoPessoa){
+                $tipoPessoa->MakeHidden(['tipoPessoa', 'pessoas']);
+            }
+        }
+
+        return $pessoa;
     }
 
     public function create(Pessoa $pessoa): Pessoa

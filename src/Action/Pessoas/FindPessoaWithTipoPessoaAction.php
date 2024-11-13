@@ -9,7 +9,7 @@ use App\Services\PessoaService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
-class FindPessoaAction extends Action
+class FindPessoaWithTipoPessoaAction extends Action
 {
     public function __construct(
         protected LoggerInterface $logger,
@@ -22,7 +22,7 @@ class FindPessoaAction extends Action
     protected function action(): Response
     {
         $idPessoa = $this->request->getAttribute('id');
-        $pessoa = $this->pessoaService->find($idPessoa);
+        $pessoa = $this->pessoaService->findWithTipoPessoa($idPessoa);
 
         return $this->respondWithData($pessoa);
     }

@@ -15,9 +15,9 @@ class PessoaService
     {
         return $this->pessoaRepository->findAll();
     }
-    public function find($id)
+    public function findWithTipoPessoa($id)
     {
-        return $this->pessoaRepository->find($id);
+        return $this->pessoaRepository->findWithTipoPessoa($id);
     }
 
     public function create(Pessoa $pessoa)

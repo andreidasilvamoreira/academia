@@ -25,7 +25,8 @@ use App\Action\Enderecos\UpdateEnderecoAction;
 use App\Action\Exercicios\CreateExercicioAction;
 use App\Action\Exercicios\DeleteExercicioAction;
 use App\Action\Exercicios\FindAllExerciciosAction;
-use App\Action\Exercicios\FindExercicioAction;
+use App\Action\Exercicios\FindExercicioModalidadeAction;
+use App\Action\Exercicios\FindExercicioTreinoDiarioAction;
 use App\Action\Exercicios\UpdateExercicioAction;
 use App\Action\FichasTreinos\CreateFichaTreinoAction;
 use App\Action\FichasTreinos\DeleteFichaTreinoAction;
@@ -46,7 +47,7 @@ use App\Action\Modalidades\UpdateModalidadeAction;
 use App\Action\Personagem\CreatePersonagemAction;
 use App\Action\Pessoas\deletePessoaAction;
 use App\Action\Pessoas\FindAllPessoasAction;
-use App\Action\Pessoas\FindPessoaAction;
+use App\Action\Pessoas\FindPessoaWithTipoPessoaAction;
 use App\Action\Pessoas\CreatePessoaAction;
 use App\Action\Pessoas\UpdatePessoaAction;
 use App\Action\Repeticoes\CreateRepeticaoAction;
@@ -72,7 +73,7 @@ use App\Action\TipoPessoas\UpdateTipoPessoaAction;
 use App\Action\TreinosDiarios\CreateTreinoDiarioAction;
 use App\Action\TreinosDiarios\DeleteTreinoDiarioAction;
 use App\Action\TreinosDiarios\FindAllTreinosDiariosAction;
-use App\Action\TreinosDiarios\FindTreinoDiarioAction;
+use App\Action\TreinosDiarios\FindTreinoDiarioExercicioAction;
 use App\Action\TreinosDiarios\UpdateTreinoDiarioAction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -100,7 +101,7 @@ return function (App $app) {
 
     $app->group('/pessoas', function (Group $group) {
         $group->get('', FindAllPessoasAction::class);
-        $group->get('/{id}', FindPessoaAction::class);
+        $group->get('/{id}/tipoPessoa', FindPessoaWithTipoPessoaAction::class);
         $group->post('', CreatePessoaAction::class);
         $group->post('/{id}', UpdatePessoaAction::class);
         $group->delete('/{id}', DeletePessoaAction::class);
@@ -157,7 +158,8 @@ return function (App $app) {
 
     $app->group('/exercicios', function (Group $group) {
         $group->get('', FindAllExerciciosAction::class);
-        $group->get('/{id}', FindExercicioAction::class);
+        $group->get('/{id}/modalidade', FindExercicioModalidadeAction::class);
+        $group->get('/{id}/treinoDiario', FindExercicioTreinoDiarioAction::class);
         $group->post('', CreateExercicioAction::class);
         $group->post('/{id}', UpdateExercicioAction::class);
         $group->delete('/{id}', DeleteExercicioAction::class);
@@ -205,7 +207,7 @@ return function (App $app) {
 
     $app->group('/treinosDiarios', function (Group $group) {
         $group->get('', FindAllTreinosDiariosAction::class);
-        $group->get('/{id}', FindTreinoDiarioAction::class);
+        $group->get('/{id}/exercicio', FindTreinoDiarioExercicioAction::class);
         $group->post('', CreateTreinoDiarioAction::class);
         $group->post('/{id}', UpdateTreinoDiarioAction::class);
         $group->delete('/{id}', DeleteTreinoDiarioAction::class);

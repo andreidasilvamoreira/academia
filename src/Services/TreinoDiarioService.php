@@ -16,9 +16,9 @@ class TreinoDiarioService
         return $this->treinoDiarioRepository->findAll();
     }
 
-    public function find($id)
+    public function findWithExercicio($id)
     {
-        return $this->treinoDiarioRepository->find($id);
+        return $this->treinoDiarioRepository->findWithExercicio($id);
     }
 
     public function create(TreinoDiario $treinoDiario)

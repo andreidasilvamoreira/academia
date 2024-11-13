@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PessoaModel extends Model
 {
     protected $table = 'pessoas';
+
     public $timestamps = false;
 
     protected $fillable = [
@@ -18,9 +19,7 @@ class PessoaModel extends Model
         'data_matricula',
         'data_nascimento',
         'senha',
-        'email',
-        'created_at' ,
-        'updated_at ',
+        'email'
     ];
 
     public function endereco()
@@ -28,9 +27,9 @@ class PessoaModel extends Model
         return $this->belongsTo(EnderecoModel::class, 'endereco_id');
     }
 
-    public function pessoaAcademia()
+    public function academia()
     {
-        return $this->hasMany(PessoaAcademiaModel::class, 'pessoa_id');
+        return $this->belongsToMany(AcademiaModel::class, 'pessoas_academias','pessoa_id', 'academia_id');
     }
 
     public function tempoFicha()
@@ -38,9 +37,9 @@ class PessoaModel extends Model
         return $this->hasMany(TempoFichaModel::class, 'pessoa_id');
     }
 
-    public function pessoaTipoPessoa()
+    public function tipoPessoa()
     {
-        return $this->hasMany(PessoaTipoPessoaModel::class, 'pessoa_id');
+        return $this->belongsToMany(TipoPessoaModel::class, 'Pessoas_Tipo_Pessoas', 'pessoa_id', 'tipo_pessoa_id');
     }
 
     public function checkin()
