@@ -31,7 +31,22 @@ class PessoaRepository extends AbstractRepository
 
         if ($pessoa) {
             foreach ($pessoa->tipoPessoa as $tipoPessoa){
-                $tipoPessoa->MakeHidden(['tipoPessoa', 'pessoas']);
+                $tipoPessoa->MakeHidden(['pivot']);
+            }
+        }
+
+        return $pessoa;
+    }
+
+    public function findWithAcademia($id)
+    {
+        $pessoa = $this->pessoa
+            ->with(['academia'])
+            ->find($id);
+
+        if ($pessoa) {
+            foreach ($pessoa->academia as $academia){
+                $academia->MakeHidden(['pivot']);
             }
         }
 

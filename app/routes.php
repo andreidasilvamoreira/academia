@@ -47,6 +47,7 @@ use App\Action\Modalidades\UpdateModalidadeAction;
 use App\Action\Personagem\CreatePersonagemAction;
 use App\Action\Pessoas\deletePessoaAction;
 use App\Action\Pessoas\FindAllPessoasAction;
+use App\Action\Pessoas\FindPessoaWithAcademiaAction;
 use App\Action\Pessoas\FindPessoaWithTipoPessoaAction;
 use App\Action\Pessoas\CreatePessoaAction;
 use App\Action\Pessoas\UpdatePessoaAction;
@@ -102,6 +103,8 @@ return function (App $app) {
     $app->group('/pessoas', function (Group $group) {
         $group->get('', FindAllPessoasAction::class);
         $group->get('/{id}/tipoPessoa', FindPessoaWithTipoPessoaAction::class);
+        $group->get('/{id}/academia', FindPessoaWithAcademiaAction::class);
+
         $group->post('', CreatePessoaAction::class);
         $group->post('/{id}', UpdatePessoaAction::class);
         $group->delete('/{id}', DeletePessoaAction::class);

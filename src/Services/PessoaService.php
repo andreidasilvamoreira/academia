@@ -20,6 +20,12 @@ class PessoaService
         return $this->pessoaRepository->findWithTipoPessoa($id);
     }
 
+    public function findWithAcademia($id)
+    {
+        return $this->pessoaRepository->findWithAcademia($id);
+    }
+
+
     public function create(Pessoa $pessoa)
     {
         return $this->pessoaRepository->create($pessoa);

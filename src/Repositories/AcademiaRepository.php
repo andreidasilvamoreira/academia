@@ -29,7 +29,7 @@ class AcademiaRepository extends AbstractRepository
         $academiasArray = $academias->map(function (AcademiaModel $academia) {
             $modalidades = $academia->modalidades->map(function ($modalidade) {
 
-                return $modalidade->makeHidden(['academia_id', 'modalidade_id']);
+                return $modalidade->makeHidden(['pivot']);
             });
 
             return [
@@ -51,7 +51,7 @@ class AcademiaRepository extends AbstractRepository
 
         if ($academia) {
             foreach ($academia->modalidades as $modalidade) {
-                    $modalidade->makeHidden(['academia_id', 'modalidade_id']);
+                    $modalidade->makeHidden(['pivot']);
             }
         }
 

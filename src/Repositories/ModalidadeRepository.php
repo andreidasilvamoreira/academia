@@ -30,7 +30,7 @@ class ModalidadeRepository extends AbstractRepository
 
         if ($modalidade) {
             foreach ($modalidade->academias as $academia) {
-                $academia->makeHidden(['academia_id', 'modalidade_id']);
+                $academia->makeHidden(['pivot']);
             }
         }
 
@@ -45,7 +45,7 @@ class ModalidadeRepository extends AbstractRepository
 
         if ($modalidade) {
             foreach ($modalidade->exercicios as $exercicio) {
-                $exercicio->makeHidden(['exercicio_id', 'modalidade_id']);
+                $exercicio->makeHidden(['pivot']);
             }
         }
 

@@ -31,7 +31,7 @@ class TipoPessoaRepository extends AbstractRepository
 
         if ($tipoPessoa) {
             foreach ($tipoPessoa->pessoas as $pessoa) {
-                $pessoa->MakeHidden(['pessoa_id', 'tipo_pessoa_id']);
+                $pessoa->MakeHidden(['pivot']);
             }
         }
         return $tipoPessoa;

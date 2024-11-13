@@ -31,7 +31,7 @@ class TreinoDiarioRepository extends AbstractRepository
 
         if ($treinoDiario) {
             foreach ($treinoDiario->exercicio as $exercicio) {
-                $exercicio->Makehidden(['exercicio_id', 'treino_diario_id']);
+                $exercicio->Makehidden(['pivot']);
             }
         }
 
