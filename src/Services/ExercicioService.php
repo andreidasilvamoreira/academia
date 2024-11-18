@@ -11,9 +11,14 @@ class ExercicioService
     {
     }
 
-    public function findAll()
+    public function findAllWithModalidade()
     {
-        return $this->exercicioRepository->findAll();
+        return $this->exercicioRepository->findAllWithModalidade();
+    }
+
+    public function findAllWithTreinoDiario()
+    {
+        return $this->exercicioRepository->findAllWithTreinoDiario();
     }
 
     public function findWithModalidade($id)

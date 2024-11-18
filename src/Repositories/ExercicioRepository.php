@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Entities\Exercicio;
 use App\Models\ExercicioModel;
+use App\Models\ModalidadeModel;
 use App\Repositories\AbstractRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -19,11 +20,62 @@ class ExercicioRepository extends AbstractRepository
         return $this->exercicioModel->getTable();
     }
 
-    public function findAll()
+    public function findAllWithModalidade()
     {
-        return $this->exercicioModel->all()->map(
-            fn(ExercicioModel $exercicioModel) => Exercicio::factory($exercicioModel->toArray())
-        )->toArray();
+        $exercicios = $this->exercicioModel
+            ->with(['modalidades'])
+            ->whereHas('modalidades')
+            ->get();
+
+        $exercicioModel = $exercicios->map(function (ExercicioModel $exercicio) {
+        $modalidade = $exercicio->modalidades->map(function ($modalidade) {
+
+            return $modalidade->makeHidden(['pivot']);
+        });
+
+                return [
+                    'id' => $exercicio->id,
+                    'nome' => $exercicio->nome,
+                    'musculatura_alvo' => $exercicio->musculatura_alvo,
+                    'dificuldade' => $exercicio->dificuldade,
+                    'quantidade_series' =>$exercicio->quantidade_series,
+                    'descricao' => $exercicio->descricao,
+                    'concluido' => $exercicio->concluido,
+                    'equipamentos_necessarios'=> $exercicio->equipamentos_necessarios,
+                    'modalidades' => $modalidade
+                ];
+            })->toArray();
+
+        return $exercicioModel;
+    }
+
+    public function findAllWithTreinoDiario()
+    {
+        $exercicios = $this->exercicioModel
+            ->with(['treinoDiario'])
+            ->whereHas('treinoDiario')
+            ->get();
+
+        $exercicioModel = $exercicios->map(function (ExercicioModel $exercicio) {
+        $treinoDiario = $exercicio->treinoDiario->map(function ($treinoDiario) {
+
+            return $treinoDiario->makeHidden(['pivot']);
+        });
+
+                return [
+                    'id' => $exercicio->id,
+                    'nome' => $exercicio->nome,
+                    'musculatura_alvo' => $exercicio->musculatura_alvo,
+                    'dificuldade' => $exercicio->dificuldade,
+                    'quantidade_series' =>$exercicio->quantidade_series,
+                    'descricao' => $exercicio->descricao,
+                    'concluido' => $exercicio->concluido,
+                    'equipamentos_necessarios'=> $exercicio->equipamentos_necessarios,
+                    'treinoDiario' => $treinoDiario
+                ];
+            })->toArray();
+
+        return $exercicioModel;
     }
 
     public function findWithModalidade($id)

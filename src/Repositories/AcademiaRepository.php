@@ -23,7 +23,7 @@ class AcademiaRepository extends AbstractRepository
     public function findAll(): array
     {
         $academias = $this->academia
-            ->with(['modalidades.modalidade'])
+            ->with(['modalidades'])
             ->get();
 
         $academiasArray = $academias->map(function (AcademiaModel $academia) {

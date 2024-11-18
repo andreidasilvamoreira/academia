@@ -9,7 +9,7 @@ use App\Services\ExercicioService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
-class FindAllExerciciosAction extends Action
+class FindAllExerciciosWithTreinoDiarioAction extends Action
 {
     public function __construct(
       protected LoggerInterface $logger,
@@ -19,7 +19,7 @@ class FindAllExerciciosAction extends Action
     }
     protected function action(): Response
     {
-        $exercicios = $this->exercicioService->findAll();
+        $exercicios = $this->exercicioService->findAllWithTreinoDiario();
 
         return $this->respondWithData($exercicios);
     }
