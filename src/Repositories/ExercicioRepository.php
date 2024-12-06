@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Entities\Exercicio;
 use App\Models\ExercicioModel;
-use App\Models\ModalidadeModel;
 use App\Repositories\AbstractRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -78,33 +77,13 @@ class ExercicioRepository extends AbstractRepository
         return $exercicioModel;
     }
 
-    public function findWithModalidade($id)
+    public function FindDinamicWith(int $id, array $withs = [])
     {
         $exercicio = $this->exercicioModel
-            ->with(['modalidades'])
-            ->find($id);
-        if ($exercicio) {
-            foreach ($exercicio->modalidades as $modalidade) {
-                $modalidade->makeHidden(['pivot']);
-            }
-        }
-
-        return $exercicio;
-    }
-
-    public function findWithTreinoDiario($id)
-    {
-        $exercicio = $this->exercicioModel
-            ->with(['treinoDiario'])
+            ->with($withs)
             ->find($id);
 
-        if ($exercicio) {
-            foreach ($exercicio->treinoDiario as $treinoDiario) {
-                $treinoDiario->makeHidden(['pivot']);
-            }
-        }
-
-        return $exercicio;
+        return $exercicio ? Exercicio::factory($exercicio->toArray()): null;
     }
 
     public function create(Exercicio $exercicio)

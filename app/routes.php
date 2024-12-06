@@ -26,8 +26,7 @@ use App\Action\Exercicios\CreateExercicioAction;
 use App\Action\Exercicios\DeleteExercicioAction;
 use App\Action\Exercicios\FindAllExerciciosWithModalidadeAction;
 use App\Action\Exercicios\FindAllExerciciosWithTreinoDiarioAction;
-use App\Action\Exercicios\FindExercicioModalidadeAction;
-use App\Action\Exercicios\FindExercicioTreinoDiarioAction;
+use App\Action\Exercicios\FindExercicioDinamicWithsAction;
 use App\Action\Exercicios\UpdateExercicioAction;
 use App\Action\FichasTreinos\CreateFichaTreinoAction;
 use App\Action\FichasTreinos\DeleteFichaTreinoAction;
@@ -163,8 +162,7 @@ return function (App $app) {
     $app->group('/exercicios', function (Group $group) {
         $group->get('/withModalidade', FindAllExerciciosWithModalidadeAction::class);
         $group->get('/withTreinoDiario', FindAllExerciciosWithTreinoDiarioAction::class);
-        $group->get('/{id}/modalidade', FindExercicioModalidadeAction::class);
-        $group->get('/{id}/treinoDiario', FindExercicioTreinoDiarioAction::class);
+        $group->get('/{id}/teste', FindExercicioDinamicWithsAction::class);
         $group->post('', CreateExercicioAction::class);
         $group->post('/{id}', UpdateExercicioAction::class);
         $group->delete('/{id}', DeleteExercicioAction::class);

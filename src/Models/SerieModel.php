@@ -18,7 +18,7 @@ class SerieModel extends Model
 
     public function exercicio()
     {
-        return $this->hasMany(ExercicioModel::class, 'serie_id');
+        return $this->belongsTo(ExercicioModel::class, 'serie_id');
     }
 
     public function carga()

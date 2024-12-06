@@ -42,6 +42,7 @@ class AcademiaRepository extends AbstractRepository
 
         return $academiasArray;
     }
+
     public function find($id): ?AcademiaModel
     {
         $academia = $this->academia

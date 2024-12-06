@@ -21,14 +21,9 @@ class ExercicioService
         return $this->exercicioRepository->findAllWithTreinoDiario();
     }
 
-    public function findWithModalidade($id)
+    public function FindDinamicWith($id, $withs = [])
     {
-        return $this->exercicioRepository->findWithModalidade($id);
-    }
-
-    public function findWithTreinoDiario($id)
-    {
-        return $this->exercicioRepository->findWithTreinoDiario($id);
+        return $this->exercicioRepository->FindDinamicWith($id, $withs);
     }
 
     public function create(Exercicio $exercicio)

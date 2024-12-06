@@ -14,6 +14,12 @@ class Exercicio extends AbstractEntity
     private ?string $concluido;
     private ?string $equipamentos_necessarios;
     private ?int $material_apoio_id;
+    private ?MaterialApoioExercicio $material_apoio_exercicio;
+
+    /**
+     * @var ?Modalidade[]
+     */
+    private $modalidades;
 
     /**
      * @return int|null
@@ -117,6 +123,28 @@ class Exercicio extends AbstractEntity
         return $this;
     }
 
+    public function getModalidades(): ?array
+    {
+        return $this->modalidades;
+    }
+
+    public function setModalidades(?array $modalidades): Exercicio
+    {
+        $this->modalidades = $modalidades;
+        return $this;
+    }
+
+    public function getMaterialApoioExercicio(): ?MaterialApoioExercicio
+    {
+        return $this->material_apoio_exercicio;
+    }
+
+    public function setMaterialApoioExercicio(?MaterialApoioExercicio $material_apoio_exercicio): Exercicio
+    {
+        $this->material_apoio_exercicio = $material_apoio_exercicio;
+        return $this;
+    }
+
     public static function factory($item): self
     {
         $item = is_array($item) ? (object)$item : $item;
@@ -131,7 +159,17 @@ class Exercicio extends AbstractEntity
             ->setConcluido($item->concluido ?? null)
             ->setEquipamentosNecessarios($item->equipamentos_necessarios ?? null)
             ->setMaterialApoioId($item->material_apoio_id ?? null)
+            ->setMaterialApoioExercicio(!empty($item->material_apoio_exercicio) ? 
+                MaterialApoioExercicio::factory($item->material_apoio_exercicio) : null
+            )
         ;
+
+        if (!empty($item->modalidades)) {
+            $entity->setModalidades(array_map(
+                fn($item) => Modalidade::factory($item),
+                (array) $item->modalidades
+            ));
+        };
 
         return $entity;
     }

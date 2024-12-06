@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Entities\TempoFicha;
 use App\Models\TempoFichaModel;
 use App\Services\TempoFichaService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TempoFichaRepository extends AbstractRepository
 {

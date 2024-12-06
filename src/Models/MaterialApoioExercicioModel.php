@@ -18,6 +18,6 @@ class MaterialApoioExercicioModel extends Model
 
     public function exercicio()
     {
-        return $this->hasMany(ExercicioModel::class, 'material_apoio_exercicio_id');
+        return $this->hasOne(ExercicioModel::class, 'material_apoio_exercicio_id');
     }
 }

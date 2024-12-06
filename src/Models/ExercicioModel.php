@@ -33,11 +33,11 @@ class ExercicioModel extends Model
 
     public function materiaisApoioExercicio()
     {
-        return $this->hasMany(MaterialApoioExercicioModel::class, 'exercicio_id');
+        return $this->belongsTo(MaterialApoioExercicioModel::class, 'exercicio_id');
     }
 
     public function serie()
     {
-        return $this->hasMany(SerieModel::class, 'exercicio_id');
+        return $this->hasOne(SerieModel::class, 'exercicio_id');
     }
 }

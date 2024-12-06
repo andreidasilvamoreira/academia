@@ -9,19 +9,24 @@ use App\Services\ExercicioService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 
-class FindExercicioModalidadeAction extends Action
+class FindExercicioDinamicWithsAction extends Action
 {
     public function __construct(
-      protected LoggerInterface $logger,
-      private ExercicioService $exercicioService,
+        protected LoggerInterface $logger,
+        private ExercicioService  $exercicioService,
 
-    ) {
+    )
+    {
         parent::__construct($logger);
     }
+
     protected function action(): Response
     {
+        $withs = ['treinoDiario'];
         $idExercicio = $this->request->getAttribute('id');
-        $exercicio = $this->exercicioService->findWithModalidade($idExercicio);
+        $queryParams = $this->request->getQueryParams();
+        $withs = !empty($queryParams['withs']) ? $queryParams['withs'] : $withs;
+        $exercicio = $this->exercicioService->FindDinamicWith($idExercicio, $withs);
 
         return $this->respondWithData($exercicio);
     }
